@@ -24,7 +24,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
     const client = await mongoRoute()
 
 
-    const notes = await Note.find({ isPrivate: false}).select('header content createdAt updatedAt _id').populate({ path: 'user', model: User, select: 'username _id'}).sort({createdAt: -1}).exec()
+    const notes = await Note.find({ isPrivate: false}).select('header content createdAt updatedAt _id').populate({ path: 'user', model: User, select: 'username _id profileColor'}).sort({createdAt: -1}).exec()
 
 
     if(!notes) {

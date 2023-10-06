@@ -16,9 +16,9 @@ import * as Y from 'yjs'
 import { WebrtcProvider } from 'y-webrtc'
 
 
-// const ydoc = new Y.Doc() 
+const ydoc = new Y.Doc() 
 
-// const provider = new WebrtcProvider('tiptaptogether', ydoc)
+const provider = new WebrtcProvider('tiptaptogether2', ydoc)
 
 
 
@@ -39,10 +39,18 @@ const  CustomBold = Bold.extend({
 
 
 
-const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
+const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete, newEditorId , setNewEditorId }) => {
     if (!editor) {
         return null
     }
+
+    let author = false
+
+    if(sessionUser === user) {
+      author = true
+    }
+
+    //console.log(author)
 
     const [open, setOpen] = useState(false)
 
@@ -61,7 +69,13 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
 
       <div className='  float-left pl-10 '>
       {/* <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link> */}
-        <button className='hover:bg-blue-200 p-1 rounded-md outline outline-blue-400' type='submit'> Save </button>
+
+        {author ? (<button className='hover:bg-blue-200 p-1 rounded-md outline outline-2 outline-blue-400' type='submit'> Save </button>) : null }
+
+
+        {/* <button className='hover:bg-blue-200 p-1 rounded-md outline outline-2 outline-blue-400' type='submit'> Save </button> */}
+
+
       </div>
       
 
@@ -99,22 +113,29 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
                                 }}
                                 />
                             </li>
-                            <li>
-                                <a
-                                    
+                            <li className='bg-gray-200 flex justify-evenly'>
+                                <button
+                                    className='hover:bg-white rounded-md w-full'
                                     onClick={closeDropdown}
                                 >
                                     Invite Editor
-                                </a>
+                                </button>
                             </li>
-                            <li>
+                            {author ? 
+                            (<li className='bg-gray-200 flex justify-evenly'>
                                 <a
-                                    
-                                    onClick={closeDropdown}
+                                    className='hover:bg-red-400 rounded-md w-full hover:text-white text-center cursor-pointer'
+                                    onClick={() => {
+                                      closeDropdown()
+                                      handleDelete()
+                                    }}
                                 >
-                                    Option 3
+                                    DELETE NOTE
                                 </a>
-                            </li>
+                            </li>) : 
+                            
+                            null}
+                            
                         </ul>
                     </div>
                 )}
@@ -207,7 +228,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
 
   }
 
-const NewNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate }) => {
+const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete,  newEditorId , setNewEditorId }) => {
   const editor = useEditor({
 
   
@@ -229,9 +250,9 @@ const NewNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate
         }
       }),
 
-      // Collaboration.configure({
-      //   document: ydoc,
-      // }),
+      Collaboration.configure({
+        document: ydoc,
+      }),
 
       // Heading.configure({
       //   levels: [1, 2, 3],
@@ -264,14 +285,14 @@ const NewNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate
     <div className='mt-4 pt-4 '>
      
    
-    <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
+    <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} sessionUser={sessionUser} user={user} handleDelete={handleDelete}  newEditorId={newEditorId}  setNewEditorId={setNewEditorId} />
    
     <EditorContent   editor={editor} />
     </div>
   )
 }
 
-export default NewNoteTipTap
+export default EditNoteTipTap
 
 
 // i could make a new editor and add it to the return or i could just make a <input /> and onchange setTitle 

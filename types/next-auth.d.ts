@@ -7,17 +7,20 @@ declare module "next-auth" {
             id: string, 
             role: string,
             name: string,
+            profileColor: string,
         } & DefaultSession
     }
 
     interface User extends DefaultUser {
         roles: string,
         username: string,
+        profileColor: string,
     }
 }
 
 declare module "next-auth/jwt" {
     interface JWT extends DefaultJwt {
-        role: string
+        role: string,
+        profileColor: string,
     }
 }

@@ -62,7 +62,7 @@ const HomePageTipTap = ({  text  }) => {
 
     editorProps: {
         attributes: {
-            class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 min-h-full max-h-screen  pb-10  '
+            class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 h-48  pb-10  '
         },
     },
 

@@ -24,22 +24,32 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
     const editedTime = new Date(updatedAt).toLocaleTimeString('en-US')
     //console.log(madeAt)
   return (
-    <div className='bg-slate-200  p-10 rounded-md outline mb-4'>
+    <div className='bg-slate-200  p-10 pb-8 rounded-md outline mb-4'>
 
       <div className='flow-root'>
 
-        <Link href={`/viewblog/${_id}`} className='text-2xl flex mb-5  hover:text-gray-500 float-left '>Title: {header}</Link>
+        <Link href={`/notes/${_id}`} className='text-2xl flex mb-5  hover:text-gray-500 float-left '>Title: {header}</Link>
 
-        <Link href={`/profile/${user._id}`} className='text-2xl hover:text-gray-500 float-right'>By: {user.username}</Link>
+        <Link href={`/profile/${user._id}`} className='text-2xl hover:text-gray-500 float-right'>
+          <div className='flex gap-2'>
+
+          <p>By: {user.username}</p>
+            
+          <div style={{ background: user.profileColor ?  user.profileColor : '#fff' }} className='rounded-xl w-7 h-7 ' />
+
+          </div>
+        </Link>
+
+        {/* <button type='button' onClick={() => setOpen(!open)} className='rounded-xl bg-purple-400 mr-2 w-7 h-7'/> */}
 
       </div>
 
 
 
-        <div className='outline p-4 rounded-md'>
+        <div className='  rounded-md'>
 
 
-          <HomePageTipTap text={content} />
+          {/* <HomePageTipTap text={content} /> */}
 
         {/* {content.length < 50
         ? (<p>{content}</p>)
@@ -65,9 +75,9 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
         </div>
 
         
-        <div className='text-center   mt-8 '>
+        <div className='text-center   mt-8 w-full  '>
 
-        <Link href={`/notes/${_id}`} className='outline p-2 mt-5 rounded-md hover:bg-gray-300 '>View</Link>
+        <Link href={`/notes/${_id}`} className=' outline p-2 mt-5 rounded-md outline-offset-4 hover:bg-gray-300 pr-10 pl-10'>View</Link>
         </div>
     </div>
   )

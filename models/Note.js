@@ -29,6 +29,11 @@ const NoteSchema = new mongoose.Schema({
     isPrivate: {
         type: Boolean,
         default: true
+    },
+    allowedEditor: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User',
+        default: []
     }
 },{
     timestamps: true

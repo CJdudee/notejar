@@ -26,10 +26,10 @@ export default async function page() {
 
 
         return (
-            <div>
-                <p className='text-white text-center font-bold text-xl bg-slate-500'>SaveNotes</p>
+            <div className='p-4'>
+                <p className='text-white text-center font-bold text-xl underline mb-2 mt-4'>SaveNotes</p>
 
-                <div className='p-4 bg-gray-400 rounded-md lg:grid-flow-row lg:grid lg:grid-cols-2 gap-2'>
+                <div className='p-4 bg-gray-400 rounded-lg lg:grid-flow-row lg:grid lg:grid-cols-2 gap-2'>
 
 
             {savedNotesJson.map((r: any) => {

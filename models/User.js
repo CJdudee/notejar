@@ -1,5 +1,17 @@
 const mongoose = require('mongoose')
 
+function colorVal (v) {
+    if (v.indexOf('#') == 0) {
+        if (v.length == 7) {
+            return true
+        } else if (v.length == 4) {
+            return true
+        }
+    }
+
+    return v
+}
+
     //if i make a list of notes with the users that means that the whenever the user is called for even username or email the posts will be called to it might be smarter to put the user.id with posts
 
 const UserSchema = new mongoose.Schema({
@@ -24,6 +36,12 @@ const UserSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId], 
         ref: 'Blogpost'
     },
+    profileColor: {
+        type: String,
+        validate: [colorVal, 'not a valid color'],
+        default: '#fff'
+    },
+    
 })
 
 //have to make users posts a subdoc so i dont go over the 16 mb limit or a populate

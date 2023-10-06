@@ -43,10 +43,10 @@ console.log(notesJson)
 
     <div className='p-10 2xl:grid grid-cols-2 gap-5 '>
 
-      <p className='text-white'> turn this into a note home page and display the users </p>
       
-      <p className='text-white'>turn this into a notes home page to view unprivate notes and make it so you can change bg and font colors of your post </p>
-      
+        <p className=' text-2xl mb-3  text-white underline'>HOME PAGE</p>
+
+
         {notesJson.map((b: any): any => {
           return (
             <HomePageNotes key={b._id} {...b} />

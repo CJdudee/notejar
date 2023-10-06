@@ -70,7 +70,8 @@ export const options: NextAuthOptions = {
                 const user = {
                     id: _id,
                     roles: founduser.roles,
-                    username: founduser.username
+                    username: founduser.username,
+                    profileColor: founduser.profileColor
                 } as any 
                
 
@@ -136,6 +137,7 @@ export const options: NextAuthOptions = {
                 token.role = user.roles
                 token.id = user.id
                 token.username = user.username
+                token.profileColor = user.profileColor
             }
             
            
@@ -150,6 +152,7 @@ export const options: NextAuthOptions = {
                 session.user.role = token.role
                 session.user.name = token.username as string ?? 'no name'
                 session.user.id = token.id as string
+                session.user.profileColor = token.profileColor
 
             }
             

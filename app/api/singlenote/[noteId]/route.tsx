@@ -164,3 +164,41 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
 
 
 }
+
+export async function DELETE(request: NextRequest) {
+
+    const session = await getServerSession(options)
+
+    const client = await mongoRoute()
+
+    const noteId = request.url.slice(request.url.lastIndexOf('/') + 1 )
+
+    //const data = await request.json()
+
+   // const {_id} = data
+
+    if(!session || !session.user.id || !noteId) {
+        return NextResponse.json('no id was found')
+    }
+
+    //if (!_id) return NextResponse.json('no id')
+
+    const note = await Note.findById(noteId).exec()
+    // const note = await Note.findById(noteId).populate({ path: 'user'}).exec()
+
+    console.log(note)
+
+    if(note.user._id != session?.user.id) {
+        return NextResponse.json('only the user can delete the post')
+    }
+
+    try {
+        
+        // const deletedPost = await Note.findOneAndDelete(noteId).exec()
+        await Note.findOneAndDelete({_id: noteId}).exec()
+        
+        return NextResponse.json('post is deleted')
+    } catch (error) {
+        return NextResponse.json('post was not deleted')
+    }
+}
