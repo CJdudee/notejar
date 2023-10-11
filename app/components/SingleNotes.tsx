@@ -4,6 +4,15 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import ViewNoteTipTap from './ViewNoteTipTap'
 
+// const isLiked = liked_by.includes(userId) 
+        //   const isLiked = true
+        // console.log(isLiked)
+
+
+// const wasNoteSaved =  await fetch(`http://localhost:3000/api/signlenote/saves/${noteId}`, {cache: 'no-cache'})
+
+// const isSaved = await wasNoteSaved.json()
+
 export default async function SingleNotes({noteId, userId, noteJson, isLiked, isSaved} : {
     noteId: string
     userId: string
@@ -15,39 +24,36 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
     const [ isPostLiked, setIsPostLiked ] = useState(isLiked)
     const [ isNoteSaved, setIsNoteSaved ] = useState(isSaved)
 
-    // const wasNoteSaved =  await fetch(`http://localhost:3000/api/signlenote/saves/${noteId}`, {cache: 'no-cache'})
+    //destructer
 
-    // const isSaved = await wasNoteSaved.json()
+    const { content: text, header: title, saved, likes, createdAt, updatedAt, isPrivate, user, id: notesId, liked_by, allowedEditor} = noteJson
 
-    // console.log(isSaved)
-    
+
+    //making user friendly date
+
+    const madeAt = new Date(createdAt).toLocaleDateString('en-us', {weekday: "short", year: 'numeric', month: 'short', day: 'numeric'} )
+    const editedAt = new Date(updatedAt).toLocaleDateString('en-us', {weekday: "short", year: 'numeric', month: 'short', day: 'numeric'} )
+
+    const madeTime = new Date(createdAt).toLocaleTimeString('en-US')
+    const editedTime = new Date(updatedAt).toLocaleTimeString('en-US')
 
     
-    
-    // const notes = await fetch(`http://localhost:3000/api/singlenote/${noteId}`, { cache: 'no-cache'})
-    
-    // const noteJson = await notes.json()
-    
-    const { content: text, header: title, saved, likes, createdAt, updatedAt, isPrivate, user, id: notesId, liked_by} = noteJson
-    
-    //console.log(noteJson)
-    
-    
+
+    //allowing edit button for the author of the note
+
+    //const allowed = allowedEditor.includes(userId)
+
     let editButton = null
     
-    if(userId === user) {
+    if(userId == user || allowedEditor.map((u: any) => {return u._id}) == userId) {
         editButton = (
             // <Link href={`/notes/${_id}`} className='outline p-2 mt-5 rounded-md hover:bg-gray-300 '>View</Link>
             <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link>
             )
         }
         
-        // const isLiked = liked_by.includes(userId) 
-        //   const isLiked = true
-        // console.log(isLiked)
-
         
-        
+        //handler
 
      async function handleLiked()  {
         
@@ -91,11 +97,19 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
     
 
   return (
-    <div className='p-4 bg-slate-400 rounded-md'>
+    <div className='  '>
+
+   
+
+    <div className=' max-w-4xl mx-auto'>
+
+    
+
+    <div className='p-4 bg-yellow-100 rounded-md  '>
        
         
 
-        <div className='flex justify-evenly'>
+        <div className='flex justify-evenly font-semibold'>
 
             {isLiked ? (<p>post is liked</p>) : (<p>post is not liked</p>)}
 
@@ -105,9 +119,14 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
             
         </div>
 
-        <div>
-            <ViewNoteTipTap text={text} title={title} isPrivate={isPrivate} editButton={editButton} createdAt={createdAt} updatedAt={updatedAt} handleLike={handleLiked} isLiked={isLiked} handleSave={handleSave} isPostLiked={isPostLiked} isNoteSaved={isNoteSaved}   />
+        <div className='max-h-full'>
+            <ViewNoteTipTap text={text} title={title} isPrivate={isPrivate} editButton={editButton} createdAt={madeAt} updatedAt={editedAt} handleLike={handleLiked} isLiked={isLiked} handleSave={handleSave} isPostLiked={isPostLiked} isNoteSaved={isNoteSaved} madeTime={madeTime} editedTime={editedTime}   />
         </div>
+        
+    </div>
+
+    </div>
+
     </div>
   )
 }

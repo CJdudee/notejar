@@ -110,15 +110,36 @@ export default  function page({params: { noteId } }: Params) {
 
     // const noteJson = await notes.json()
 
-    if (isLoading === true || status === 'loading' || !noteJson ||!noteJson || !noteJson?.liked_by ) {
+    if (isLoading === true || status === 'loading'  || !noteJson?.liked_by ) {
       return (
         <div className='p-4'>
 
       <p>...Loading</p>
       
         </div>
+
+      )
+
+    }
+
+
+    if(!noteJson) {
+      return (
+        <div>
+        
+        <p>Note is Private</p>
+
+        </div>
       )
     }
+
+    // if(noteJson.allowedEditor != session.user.id) {
+    //   return (
+    //     <div>
+    //       <p>not allowed</p>
+    //     </div>
+    //   )
+    // }
 
     if(noteJson?.liked_by) {
       
@@ -130,7 +151,7 @@ export default  function page({params: { noteId } }: Params) {
    
   return (
     <div className='p-4'>
-      <Suspense fallback={<p>loadingsomething</p>}>
+      <Suspense fallback={<p>Loading Something</p>}>
         <SingleNotes noteId={noteId} userId={session.user.id } noteJson={noteJson} isLiked={isLiked} isSaved={isSaved} />
       </Suspense>
     </div>

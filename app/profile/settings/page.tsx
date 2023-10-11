@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { use, useEffect, useState } from 'react'
+import Select from 'react-select'
 
 
 // const imageLoader = ({ src, width, quality}) => {
@@ -28,7 +29,7 @@ export default function page() {
 
     
     
-   
+     
 
     
     
@@ -58,7 +59,26 @@ export default function page() {
     
     const router = useRouter()
 
-   
+    async function handleDeleteUser() {
+
+        try {
+
+            const response = await fetch('http://localhost:3000/users', {
+            method: 'DELETE'
+        })
+
+        if (!response.ok) {
+            throw new Error('error with post')
+        }
+
+        } catch (error) {
+            
+        }
+
+        router.push('/')
+
+
+    }
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -93,28 +113,64 @@ export default function page() {
         }   
 
         // console.log(isPrivate.value)
-       
 
         router.push('/')
 
+    }
+
+    
+
+    const color = ['blue', 'pink', 'orange', 'purple', 'green'],
+    displayoption = function(color) {
+        return (
+        <option>{color}</option>
+        )
+    }
+
+    const colorSelect = [
+        { value: 'blue', label: 'blue' },
+        { value: 'pink', label: 'pink' },
+        { value: 'orange', label: 'orange' },
+        { value: 'purple', label: 'purple' },
+        { value: 'green', label: 'green' },
+
+    ]
+
+    const handleProCol = (selectedOption) => {
+        console.log(selectedOption)
+        setProfileImg(selectedOption.value)
     }
 
 
   return (
     <form onSubmit={handleSubmit} className=' p-4'>
 
+        <p className='text-white'>Turn the choose your profile color with an array </p>
+
     <div className='bg-slate-300 rounded p-4'>
 
         <div className='flow-root'>
-            <button type='submit' className=' float-right mt-4'>Save</button>
+            <button type='submit' className=' float-left ml-6 outline p-2 rounded outline-2 hover:bg-slate-400 mt-4'>Save</button>
         </div>
 
-        <div className='grid grid-cols-2'>
 
-        
+        {/* <div className='mt-4'>
+            <select  value={profileImg} onChange={(e) => {setProfileImg(e.target.value)}}>
+                {color.map(displayoption)}
+            </select>
+        </div> */}
 
-    <div className='mb-4 p-4 text-start  '>
-            <label className='text-2xl  ' htmlFor='username'>
+
+        <div className='mt-4 w-1/2 p-3'>
+        <Select options={colorSelect} onChange={handleProCol} className=' text-sm ' />
+        </div>
+
+        {/* //username and profile color div */}
+        <div className='grid grid-cols-2 gap-2'>
+
+            <div className='mb-4 p-4 text-start  '>
+
+            <label className='text-2xl font-bold  ' htmlFor='username'>
                 Username
             </label>
             
@@ -130,6 +186,7 @@ export default function page() {
             required
             minLength={3}
             />
+
             </div>
 
         </div>
@@ -140,11 +197,11 @@ export default function page() {
 
             
 
-            <label className='text-2xl  ' htmlFor='username'>
+            <label className='text-2xl font-bold ' htmlFor='username'>
                 Profile Color
             </label>
 
-            {/* https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fthumb%2F3%2F3b%2FSpongeBob_SquarePants_character.svg%2F1200px-SpongeBob_SquarePants_character.svg.png&tbnid=yMGXcLeRREWtZM&vet=12ahUKEwjr4Oy2jd6BAxUuh-4BHcSbIw4QMygAegQIARB1..i&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FSpongeBob_SquarePants_(character)&docid=QJghRjEztyfmyM&w=1200&h=1200&q=spongebob&ved=2ahUKEwjr4Oy2jd6BAxUuh-4BHcSbIw4QMygAegQIARB1 */}
+            
  
            <div style={{ backgroundColor: profileImg ? profileImg : '#fff'}} className='w-7 h-7 rounded-xl'></div>
 
@@ -165,9 +222,11 @@ export default function page() {
             />
             </div>
 
-        </div>
+            </div>
+
 
         </div>
+        {/* //end of username and profile color div */}
 
         
 
@@ -177,31 +236,31 @@ export default function page() {
 
         <div className='mb-4 p-4 text-start  '>
 
-            <p className='text-center mb-2 text-2xl'>Change Password</p>
+            <p className='text-center mb-3 text-2xl font-bold '>Change Password</p>
 
-            <div className='outline outline-offset-2 text-center p-4'>
+            <div className='outline outline-offset-2 text-center p-4 rounded-md'>
 
             
 
-            <label className='text-2xl  ' htmlFor='username'>
+            <label className='text-2xl font-bold  ' htmlFor='username'>
                 Old Password
             </label>
             
             <div className='mt-2'>
 
             <input 
-            className='    w-96 lg:w-1/2 rounded-md  pl-2 '
+            className='w-96 lg:w-1/2 rounded-md  pl-2 '
             id='username'
             type='password'
             name='username'
             value={oldPwd}
             onChange={(e) => { setOldPwd(e.target.value)}}
-            required
-            minLength={3}
+            
+            
             />
             </div>
 
-            <label className='text-2xl  ' htmlFor='username'>
+            <label className='text-2xl font-bold  ' htmlFor='username'>
                 New Password
             </label>
             
@@ -214,8 +273,8 @@ export default function page() {
             name='username'
             value={newPwd}
             onChange={(e) => { setNewPwd(e.target.value)}}
-            required
-            minLength={3}
+            
+            
             />
             </div>
 
@@ -224,6 +283,10 @@ export default function page() {
 
         </div>
 
+        </div>
+
+        <div className='flex justify-center'>
+            <button type='button' onClick={() => handleDeleteUser} className='w-1/2 outline  rounded-md hover:bg-red-300'>DELETE USER</button>
         </div>
 
     </div>

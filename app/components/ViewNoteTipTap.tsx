@@ -28,7 +28,7 @@ const  CustomBold = Bold.extend({
 
 
 
-const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, handleLike, isLiked, handleSave, isPostLiked, isNoteSaved  }) => {
+const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, handleLike, isLiked, handleSave, isPostLiked, isNoteSaved, madeTime, editedTime  }) => {
     if (!editor) {
         return null
     }
@@ -158,8 +158,8 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
 
       <div className='flex justify-evenly mb-4'>
     
-        <p>Created At: {createdAt}</p>
-        <p>Updated At: {updatedAt}</p>
+        <p>Created At: {createdAt} : {madeTime}</p>
+        <p>Updated At: {updatedAt}: {editedTime}</p>
 
       </div>
       
@@ -169,7 +169,7 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
 
   }
 
-const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, createdAt, handleLike, isLiked, handleSave, isPostLiked, isNoteSaved  }) => {
+const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, createdAt, handleLike, isLiked, handleSave, isPostLiked, isNoteSaved, madeTime, editedTime  }) => {
   const editor = useEditor({
 
   
@@ -201,7 +201,7 @@ const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, creat
 
     editorProps: {
         attributes: {
-            class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen  pb-10  '
+            class: 'bg-slate-200  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen  pb-10  '
         },
     },
 
@@ -222,12 +222,12 @@ const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, creat
   
 
   return (
-    <div className='mt-4 pt-4'>
+    <div className='mt-1 pt-1'>
      
    
-    <MenuBar editor={editor}  title={title} isPrivate={isPrivate} editButton={editButton} updatedAt={updatedAt} createdAt={createdAt} handleLike={handleLike} isLiked={isLiked} handleSave={handleSave} isPostLiked={isPostLiked} isNoteSaved={isNoteSaved}  />
+    <MenuBar editor={editor}  title={title} isPrivate={isPrivate} editButton={editButton} updatedAt={updatedAt} createdAt={createdAt} handleLike={handleLike} isLiked={isLiked} handleSave={handleSave} isPostLiked={isPostLiked} isNoteSaved={isNoteSaved} madeTime={madeTime} editedTime={editedTime}  />
    
-    <EditorContent   editor={editor} />
+    <EditorContent editor={editor} />
     </div>
   )
 }

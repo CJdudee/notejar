@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt'
 import { getServerSession } from "next-auth";
 import { options } from "../auth/[...nextauth]/options";
+import Note from "@/models/Note";
+import Usersaved from "@/models/Usersaved";
 
 export async function POST(request: NextRequest, res: NextResponse) {
     
@@ -106,4 +108,35 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
 
 
 
+}
+
+
+export async function DELETE(request: NextRequest, res: NextResponse) {
+
+
+    const session = await getServerSession(options)
+    
+
+    const client = await mongoRoute()
+
+    if (!session) {
+        return NextResponse.json('you have to have a user to delete')
+    }
+
+    try {
+        var deletedUser = await User.findByIdAndDelete(session.user.id)
+
+        var deletedNotes = await Note.DeleteMany({user: session.user.id})
+
+        var deletedUserSaved = await Usersaved.DeleteMany({userId: session.user.id})
+    } catch (error) {
+        console.log(error) 
+        return NextResponse.json('error with deleting')
+    }
+
+    if (deletedUser &&  deletedNotes && deletedUserSaved) {
+        return NextResponse.json('user was deleted')
+    } else {
+        return NextResponse.json('error with delete')
+    }
 }

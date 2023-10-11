@@ -11,14 +11,14 @@ import { useEffect, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
 
 //import * as Y from 'yjs'
-import Collaboration from '@tiptap/extension-collaboration'
-import * as Y from 'yjs'
-import { WebrtcProvider } from 'y-webrtc'
+//import Collaboration from '@tiptap/extension-collaboration'
+// import * as Y from 'yjs'
+// import { WebrtcProvider } from 'y-webrtc'
 
 
-const ydoc = new Y.Doc() 
+// const ydoc = new Y.Doc() 
 
-const provider = new WebrtcProvider('tiptaptogether2', ydoc)
+// const provider = new WebrtcProvider('tiptaptogether2', ydoc)
 
 
 
@@ -39,7 +39,7 @@ const  CustomBold = Bold.extend({
 
 
 
-const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete, newEditorId , setNewEditorId }) => {
+const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete, newEditorName , setNewEditorName,  inviteModal, setInviteModal }) => {
     if (!editor) {
         return null
     }
@@ -116,7 +116,10 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
                             <li className='bg-gray-200 flex justify-evenly'>
                                 <button
                                     className='hover:bg-white rounded-md w-full'
-                                    onClick={closeDropdown}
+                                    onClick={() => {
+                                      closeDropdown() 
+                                      setInviteModal(!inviteModal)
+                                    }}
                                 >
                                     Invite Editor
                                 </button>
@@ -228,7 +231,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
 
   }
 
-const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete,  newEditorId , setNewEditorId }) => {
+const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete,  newEditorName , setNewEditorName, inviteModal, setInviteModal }) => {
   const editor = useEditor({
 
   
@@ -250,9 +253,9 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
         }
       }),
 
-      Collaboration.configure({
-        document: ydoc,
-      }),
+      // Collaboration.configure({
+      //   document: ydoc,
+      // }),
 
       // Heading.configure({
       //   levels: [1, 2, 3],
@@ -285,7 +288,7 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
     <div className='mt-4 pt-4 '>
      
    
-    <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} sessionUser={sessionUser} user={user} handleDelete={handleDelete}  newEditorId={newEditorId}  setNewEditorId={setNewEditorId} />
+    <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} sessionUser={sessionUser} user={user} handleDelete={handleDelete}  newEditorName={newEditorName}  setNewEditorName={setNewEditorName} inviteModal={inviteModal} setInviteModal={setInviteModal} />
    
     <EditorContent   editor={editor} />
     </div>

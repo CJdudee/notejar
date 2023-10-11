@@ -26,7 +26,7 @@ export async function GET(request: NextRequest, res: NextResponse) {
     // }
 
 
-    console.log(request.body)
+    //console.log(request.body)
 
     //const noteId =  request.nextUrl.searchParams.get('')
 
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest, res: NextResponse) {
 
     // const { id } = user
 
-    const note = await Note.findById(noteId).exec()
+    const note = await Note.findById(noteId).populate({path: 'allowedEditor', model: User, select: '_id username profileColor'}).exec()
 
     //console.log(note)
 

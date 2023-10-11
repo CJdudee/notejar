@@ -15,7 +15,7 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
   _id: string
 }) {
 
-
+  //console.log(user)
 
     const madeAt = new Date(createdAt).toLocaleDateString('en-us', {weekday: "long", year: 'numeric', month: 'short', day: 'numeric'} )
     const editedAt = new Date(updatedAt).toLocaleDateString('en-us', {weekday: "long", year: 'numeric', month: 'short', day: 'numeric'} )

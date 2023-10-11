@@ -13,7 +13,7 @@ type Params = {
 }
 
 
-export default  function page({params: { noteId } }: Params) {
+export default  function page({params: { noteId: postId } }: Params) {
 
   const {data: session, status } = useSession({ 
     required: true, 
@@ -28,7 +28,7 @@ export default  function page({params: { noteId } }: Params) {
 
   const [ noteJson, setNoteJson ] = useState<any>()
 
-
+  const noteId = postId
   
 
   const router = useRouter()
@@ -43,6 +43,8 @@ useEffect(() => {
 
       const noteJson = await notes.json() 
 
+      console.log(noteJson)
+
       setNoteJson(noteJson)
 
       //console.log(noteJson)
@@ -50,7 +52,7 @@ useEffect(() => {
 
   }
         
-  console.log(status)
+  
 
   if(status === 'authenticated') {
 
@@ -69,7 +71,7 @@ useEffect(() => {
 }, [status])
 
 
-if(isLoading === true || !noteJson || status !== 'authenticated' ) {
+if( isLoading === true || !noteJson || status !== 'authenticated' ) {
   return <p className='bg-slate-300 text-center pt-4 pb-4'>...Loading</p>
 }
 
@@ -79,10 +81,14 @@ if(isLoading === true || !noteJson || status !== 'authenticated' ) {
 
     //console.log(noteJson)
 
+    console.log(noteJson)
+
 
     const sessionUser = session?.user.id
 
-    if(sessionUser !== noteJson.allowedEditor && sessionUser !== noteJson.user) {
+    //const allowed = noteJson.allowedEditor.includes(sessionUser)
+
+    if( sessionUser != noteJson.allowedEditor.map((u: any) => { return u._id }) && sessionUser != noteJson.user ) {
       router.push('/')
     }
 

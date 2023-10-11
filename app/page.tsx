@@ -29,7 +29,7 @@ export default async function Home() {
 
 const notesJson = await notes.json()
 
-console.log(notesJson)
+
 
 
 
