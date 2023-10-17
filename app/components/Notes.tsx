@@ -3,16 +3,17 @@
 import Link from 'next/link'
 import React from 'react'
 
-export default function Notes({_id, header, content, saved, likes, user, isPrivate, createdAt, updatedAt}: {
+export default function Notes({_id, header, content, saved, likes, user, isPrivate, createdAt, updatedAt, sessionUser}: {
     _id: string, 
     header: string, 
     content: string, 
     saved: number,
     likes: number, 
-    user: string,
+    user: any,
     isPrivate: boolean,
     createdAt: string,
     updatedAt: string,
+    sessionUser: any,
 }) {
 
     const madeAt = new Date(createdAt).toLocaleDateString('en-us', { year: '2-digit', month: '2-digit', day: 'numeric'} )
@@ -42,6 +43,46 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
     }
 
 
+    let titleAndUser 
+
+    if (user?.username) {
+
+      titleAndUser = (
+        <div className='flex justify-evenly w-full mb-2 mx-auto '>
+
+
+          <p className=' text-start mb-2 font-semibold text-lg '>title: {header}</p>
+          <p className=' text-start mb-2 font-semibold text-lg '>User: {user.username}</p>
+
+        </div>
+      )
+    
+      
+    } else {
+      titleAndUser = (
+        <p className=' text-center mb-2 font-semibold text-lg '>title: {header}</p>
+      )
+    }
+      
+    // if (sessionUser.id == user) {
+    //   titleAndUser = (
+    //     <p className=' text-center mb-2 font-semibold text-lg '>title: {header}</p>
+    //   )
+    // } else {
+    //   titleAndUser = (
+    //     <div className='flex justify-evenly w-full mb-2 mx-auto '>
+
+
+    //       <p className=' text-start mb-2 font-semibold text-lg '>title: {header}</p>
+    //       <p className=' text-start mb-2 font-semibold text-lg '>User: {user.username}</p>
+
+    //     </div>
+    //   )
+    // }
+
+
+
+
   return (
     <div className='outline rounded-lg bg-gray-200 pt-4 pb-4  block mb-4 lg:mb-0 '>
 
@@ -51,7 +92,9 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
 
       </div>
 
-        <p className=' text-center mb-2 font-semibold text-lg'>title: {header}</p>
+        
+        {titleAndUser}
+        
 
         <div className='grid grid-rows-2 gap-1 mb-4'>
 

@@ -9,6 +9,9 @@ import StarterKit from '@tiptap/starter-kit'
 
 import { useEffect, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
+import EditNoteDropDown from './EditNoteDropDown'
+
+
 
 //import * as Y from 'yjs'
 //import Collaboration from '@tiptap/extension-collaboration'
@@ -70,7 +73,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
       <div className='  float-left pl-10 '>
       {/* <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link> */}
 
-        {author ? (<button className='hover:bg-blue-200 p-1 rounded-md outline outline-2 outline-blue-400' type='submit'> Save </button>) : null }
+        {author ? (<button className='hover:bg-blue-200 p-1 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>) : null }
 
 
         {/* <button className='hover:bg-blue-200 p-1 rounded-md outline outline-2 outline-blue-400' type='submit'> Save </button> */}
@@ -80,7 +83,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
       
 
           
-
+        {author ?
         <div className=' float-right pr-10' >
             <button 
             className='text-3xl'
@@ -90,66 +93,17 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
 
 
     {open && (
-                    <div className="mt-1 origin-top-right absolute right-0 S w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 visible">
-                        <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                            <li className='bg-gray-300 flex justify-evenly'>
-                                <button
-                                    className=' hover:bg-white rounded-md w-full'
-                                    
-                                    onClick={() => {
-                                      setOpen(!open)
-                                      setIsPrivate(!isPrivate)
-                                    }}
-                                >
-                                    Is Private :
-                                </button>
-                                <input
-                                className='mr-2 cursor-pointer' 
-                                type='checkbox' 
-                                checked={isPrivate}
-                                onChange={() => {
-                                  setOpen(!open)
-                                  setIsPrivate(!isPrivate)
-                                }}
-                                />
-                            </li>
-                            <li className='bg-gray-200 flex justify-evenly'>
-                                <button
-                                    className='hover:bg-white rounded-md w-full'
-                                    onClick={() => {
-                                      closeDropdown() 
-                                      setInviteModal(!inviteModal)
-                                    }}
-                                >
-                                    Invite Editor
-                                </button>
-                            </li>
-                            {author ? 
-                            (<li className='bg-gray-200 flex justify-evenly'>
-                                <a
-                                    className='hover:bg-red-400 rounded-md w-full hover:text-white text-center cursor-pointer'
-                                    onClick={() => {
-                                      closeDropdown()
-                                      handleDelete()
-                                    }}
-                                >
-                                    DELETE NOTE
-                                </a>
-                            </li>) : 
-                            
-                            null}
-                            
-                        </ul>
-                    </div>
-                )}
+      <EditNoteDropDown closeDropdown={closeDropdown} author={author} handleDelete={handleDelete} setInviteModal={setInviteModal} inviteModal={inviteModal} setIsPrivate={setIsPrivate} isPrivate={isPrivate} setOpen={setOpen} open={open} />
+      )}
 
 
 
         </div>
+        : null}
         
       </div>
       
-      <div className='flex justify-center pl-10'>
+      <div className='flex justify-center pl-10 mb-2 mt-2'>
         <input 
         placeholder='Title'
         onChange={e => setTitle(e.target.value)}
@@ -159,18 +113,18 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
         />
       </div>
 
-        <div className=' lg:outline outline-1 outline-offset-8 gap-y-3 lg:mr-40 lg:ml-40 xl:mr-60 xl:ml-60  text-center mb-4  flex justify-evenly  lg:grid grid-rows-2 grid-cols-3 '>
+        <div className=' gap-y-3 text-center mb-4  md:flex justify-evenly  grid grid-rows-2 grid-cols-3 '>
 
         
 
         
         <button
         type='button'
-        className={editor.isActive('bold') ? 'is-active' : ''}
+        className={editor.isActive('bold') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
         onClick={() => editor.chain().focus().toggleBold().run()}
         
         >
-        toggleBold
+        Bold
       </button>
 
       
@@ -178,7 +132,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
+        className={editor.isActive('heading', { level: 1 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
       >
         H1
       </button>
@@ -193,7 +147,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+        className={editor.isActive('heading', { level: 2 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
       >
         H2
       </button>
@@ -208,18 +162,18 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={editor.isActive('strike') ? 'is-active' : ''}
+        className={editor.isActive('strike') ? 'is-active hover:text-gray-400 ' : 'hover:text-gray-400'}
       >
-        toggleStrike
+        Strike
       </button>
 
 
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive('code') ? 'is-active' : ''}
+        className={editor.isActive('code') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
       >
-        toggleCodeBlock
+        Code Block
       </button>
 
       </div>
@@ -299,3 +253,57 @@ export default EditNoteTipTap
 
 
 // i could make a new editor and add it to the return or i could just make a <input /> and onchange setTitle 
+
+
+
+// <div className="mt-1 origin-top-right absolute right-0 S w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 visible">
+                    //     <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    //         <li className='bg-gray-300 flex justify-evenly'>
+                    //             <button
+                    //                 className=' hover:bg-white rounded-md w-full'
+                                    
+                    //                 onClick={() => {
+                    //                   setOpen(!open)
+                    //                   setIsPrivate(!isPrivate)
+                    //                 }}
+                    //             >
+                    //                 Is Private :
+                    //             </button>
+                    //             <input
+                    //             className='mr-2 cursor-pointer' 
+                    //             type='checkbox' 
+                    //             checked={isPrivate}
+                    //             onChange={() => {
+                    //               setOpen(!open)
+                    //               setIsPrivate(!isPrivate)
+                    //             }}
+                    //             />
+                    //         </li>
+                    //         <li className='bg-gray-200 flex justify-evenly'>
+                    //             <button
+                    //                 className='hover:bg-white rounded-md w-full'
+                    //                 onClick={() => {
+                    //                   closeDropdown() 
+                    //                   setInviteModal(!inviteModal)
+                    //                 }}
+                    //             >
+                    //                 Invite Editor
+                    //             </button>
+                    //         </li>
+                    //         {author ? 
+                    //         (<li className='bg-gray-200 flex justify-evenly'>
+                    //             <a
+                    //                 className='hover:bg-red-400 rounded-md w-full hover:text-white text-center cursor-pointer'
+                    //                 onClick={() => {
+                    //                   closeDropdown()
+                    //                   handleDelete()
+                    //                 }}
+                    //             >
+                    //                 DELETE NOTE
+                    //             </a>
+                    //         </li>) : 
+                            
+                    //         null}
+                            
+                    //     </ul>
+                    // </div>

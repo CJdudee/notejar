@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
     },
     profileColor: {
         type: String,
-        validate: [colorVal, 'not a valid color'],
+        //validate: [colorVal, 'not a valid color'],
         default: '#fff'
     },
     

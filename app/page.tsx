@@ -41,18 +41,20 @@ const notesJson = await notes.json()
 
   return (
 
-    <div className='p-10 2xl:grid grid-cols-2 gap-5 '>
+    <div className='px-10 py-8  '>
 
       
         <p className=' text-2xl mb-3  text-white underline'>HOME PAGE</p>
 
+        <ul className='2xl:grid grid-cols-2 gap-4'>
 
         {notesJson.map((b: any): any => {
           return (
             <HomePageNotes key={b._id} {...b} />
-          )
-        })}
+            )
+          })}
 
+          </ul>
     </div>
   )
 }

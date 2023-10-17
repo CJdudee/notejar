@@ -9,6 +9,7 @@ import StarterKit from '@tiptap/starter-kit'
 
 import {  Ref, useEffect, useRef, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
+import ViewNoteDropDown from './ViewNoteDropDown'
 
 
 const  CustomBold = Bold.extend({
@@ -68,7 +69,7 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
 
       <div className='flow-root  '>
 
-        <div className='float-left pl-10'>
+        <div className='float-left pl-4'>
 
           {editButton}
 
@@ -78,7 +79,7 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
       
 
 
-        <div className=' float-right pr-10 text-lg' ref={menuRef} >
+        <div className=' float-right pr-4 text-lg' ref={menuRef} >
             <button
             className='text-3xl' 
             type='button'
@@ -87,60 +88,7 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
 
 
     {open && (
-                    <div className="mt-1 origin-bottom-left absolute right-10 S w-56 rounded-md   shadow-sm bg-white ring-1 ring-white ring-opacity-5 visible " >
-                        <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                            <li className='bg-gray-300 flex justify-evenly'>
-                                <button
-                                    className='w-full'
-                                    
-                                    onClick={() => {
-                                      setOpen(!open)
-                                      
-                                    }}
-                                >
-                                    Is Private :
-                                </button>
-                                <input
-                                className='mr-2 ' 
-                                type='checkbox' 
-                                checked={isPrivate}
-                                readOnly
-                                />
-                            </li>
-                            <li className='bg-gray-200 flex justify-evenly'>
-                                <button
-                                    className='pl-1 pr-1 hover:bg-white rounded-md w-full'
-                                    
-                                    onClick={handleSave}
-                                >
-                                    Save
-                                </button>
-
-                                <input
-                                className=' cursor-pointer mr-2' 
-                                type='checkbox' 
-                                onChange={handleSave}
-                                checked={isNoteSaved}
-                                
-                                />
-                            </li>
-                            <li className='bg-gray-300 flex justify-evenly '>
-                                <button
-                                    className='pl-1 pr-1 hover:bg-white rounded-md w-full'
-                                    onClick={handleLike}
-                                >
-                                    Like
-                                </button>
-                                <input
-                                className='cursor-pointer mr-2' 
-                                type='checkbox' 
-                                onChange={handleLike}
-                                checked={isPostLiked}
-                                
-                                />
-                            </li>
-                        </ul>
-                    </div>
+                    <ViewNoteDropDown setOpen={setOpen} open={open} isPrivate={isPrivate} handleSave={handleSave} isNoteSaved={isNoteSaved} handleLike={handleLike} isPostLiked={isPostLiked} />
                 )}
 
 
@@ -150,13 +98,12 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
       </div>
       
       <div className='flex justify-center pl-10'>
-        <h2 
-        className='  mb-4  rounded-md text-2xl p-1 '
+        <h2 className='  mb-6  rounded-md text-2xl p-1 '
 
         > { title } </h2>
       </div>
 
-      <div className='flex justify-evenly mb-4'>
+      <div className='block text-center md:flex justify-evenly mb-4 font-semibold text-sm'>
     
         <p>Created At: {createdAt} : {madeTime}</p>
         <p>Updated At: {updatedAt}: {editedTime}</p>
@@ -236,3 +183,59 @@ export default ViewNoteTipTap
 
 
 // i could make a new editor and add it to the return or i could just make a <input /> and onchange setTitle 
+
+
+ // <div className="mt-1 origin-bottom-left absolute right-10 S w-56 rounded-md   shadow-sm bg-white ring-1 ring-white ring-opacity-5 visible " >
+                    //     <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    //         <li className='bg-gray-300 flex justify-evenly'>
+                    //             <button
+                    //                 className='w-full'
+                                    
+                    //                 onClick={() => {
+                    //                   setOpen(!open)
+                                      
+                    //                 }}
+                    //             >
+                    //                 Is Private :
+                    //             </button>
+                    //             <input
+                    //             className='mr-2 ' 
+                    //             type='checkbox' 
+                    //             checked={isPrivate}
+                    //             readOnly
+                    //             />
+                    //         </li>
+                    //         <li className='bg-gray-200 flex justify-evenly'>
+                    //             <button
+                    //                 className='pl-1 pr-1 hover:bg-white rounded-md w-full'
+                                    
+                    //                 onClick={handleSave}
+                    //             >
+                    //                 Save
+                    //             </button>
+
+                    //             <input
+                    //             className=' cursor-pointer mr-2' 
+                    //             type='checkbox' 
+                    //             onChange={handleSave}
+                    //             checked={isNoteSaved}
+                                
+                    //             />
+                    //         </li>
+                    //         <li className='bg-gray-300 flex justify-evenly '>
+                    //             <button
+                    //                 className='pl-1 pr-1 hover:bg-white rounded-md w-full'
+                    //                 onClick={handleLike}
+                    //             >
+                    //                 Like
+                    //             </button>
+                    //             <input
+                    //             className='cursor-pointer mr-2' 
+                    //             type='checkbox' 
+                    //             onChange={handleLike}
+                    //             checked={isPostLiked}
+                                
+                    //             />
+                    //         </li>
+                    //     </ul>
+                    // </div>

@@ -97,7 +97,7 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
     
 
   return (
-    <div className='  '>
+    <div className='p-4'>
 
    
 
@@ -105,13 +105,13 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
 
     
 
-    <div className='p-4 bg-yellow-100 rounded-md  '>
+    <div className='p-4 bg-blue-200 rounded-md  '>
        
         
 
-        <div className='flex justify-evenly font-semibold'>
+        <div className='flex justify-evenly font-semibold mb-4'>
 
-            {isLiked ? (<p>post is liked</p>) : (<p>post is not liked</p>)}
+            {/* {isLiked ? (<p>post is liked</p>) : (<p>post is not liked</p>)} */}
 
 
             <p>Likes: {likes}</p>

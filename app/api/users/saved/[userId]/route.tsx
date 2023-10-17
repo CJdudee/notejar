@@ -39,7 +39,7 @@ export async function GET(request: NextRequest, res: NextResponse) {
 
     const userSaved = await Usersaved.find({ userId }).populate({ path: 'noteId', select: 'header likes user createdAt updatedAt', populate: [
         { path: 'user', select: '-password -roles'}
-    ]}).exec()
+    ]}).sort({createdAt: -1}).exec()
 
     
 

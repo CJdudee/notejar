@@ -112,9 +112,9 @@ export default  function page({params: { noteId } }: Params) {
 
     if (isLoading === true || status === 'loading'  || !noteJson?.liked_by ) {
       return (
-        <div className='p-4'>
+        <div className='p-4 bg-slate-300 '>
 
-      <p>...Loading</p>
+      <p className='text-center text-xl bg-slate-300'>Loading</p>
       
         </div>
 
@@ -150,8 +150,8 @@ export default  function page({params: { noteId } }: Params) {
 
    
   return (
-    <div className='p-4'>
-      <Suspense fallback={<p>Loading Something</p>}>
+    <div className=''>
+      <Suspense fallback={<p className='bg-slate-300 text-center p-4 text-xl'>Loading</p>}>
         <SingleNotes noteId={noteId} userId={session.user.id } noteJson={noteJson} isLiked={isLiked} isSaved={isSaved} />
       </Suspense>
     </div>

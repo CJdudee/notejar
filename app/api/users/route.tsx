@@ -58,15 +58,16 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
 
     console.log(data)
 
-    const {username, oldPwd, newPwd } = data
+    const {username, oldPwd, newPwd, profileColor } = data
 
-    if (!username || !oldPwd && !newPwd ) {
+    if (!username  ) {
         return NextResponse.json('hey there no name')
 
 
      }
 
-     const users = await User.findById(session.user.id).select('password').exec()
+     //const users = await User.findById(session.user.id).select('password').exec()
+     const users = await User.findById(session.user.id).exec()
      
      console.log(users)
 
@@ -86,6 +87,10 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
 
         users.password = hashedPwd
 
+     }
+
+     if(profileColor) {
+        users.profileColor = profileColor
      }
 
      users.username = username

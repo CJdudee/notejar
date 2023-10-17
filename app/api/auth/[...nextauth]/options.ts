@@ -125,13 +125,27 @@ export const options: NextAuthOptions = {
             
         },
         //https: //authjs. dev/guides /basics/role-based-access-control#persisting-the-role
-        async jwt({token, user, account, profile }) {
+        async jwt({token, user, account, profile, trigger, session }) {
             //console.log(account)
             //console.log(profile)
             //console.log(token)
             //console.log(user)
             //console.log(account)
             //console.log(profile)
+            
+
+            if(trigger === 'update') {
+                // token.profileColor = user.profileColor
+                console.log(trigger)
+                console.log(session)
+                console.log(session.profileColor)
+                console.log()
+
+                token.profileColor = session.profileColor
+                
+            }
+
+            
             if (user) {
 
                 token.role = user.roles
@@ -146,8 +160,12 @@ export const options: NextAuthOptions = {
             return token
         },
         //if you want to use the role in client components
-        async session({ session, user, token }) {
+        async session({ session, user, token, trigger }) {
             //console.log(token)
+
+            
+
+
             if (session?.user) {
                 session.user.role = token.role
                 session.user.name = token.username as string ?? 'no name'

@@ -26,15 +26,15 @@ export default async function page() {
 
 
         return (
-            <div className='p-4'>
-                <p className='text-white text-center font-bold text-xl underline mb-2 mt-4'>SaveNotes</p>
+            <div className=''>
+                <p className='text-white text-center font-bold text-xl underline  pt-2'>SaveNotes</p>
 
-                <div className='p-4 bg-gray-400 rounded-lg lg:grid-flow-row lg:grid lg:grid-cols-2 gap-2'>
+                <div className='p-4 mt-2 bg-gray-400 lg:grid-flow-row lg:grid lg:grid-cols-2 gap-2'>
 
 
             {savedNotesJson.map((r: any) => {
                 return (
-                    <SavedNotes {...r.noteId} />
+                    <SavedNotes {...r.noteId} savedAt={r.createdAt} />
                     )
                 })}
 

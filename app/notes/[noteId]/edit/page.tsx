@@ -103,7 +103,7 @@ if( isLoading === true || !noteJson || status !== 'authenticated' ) {
 
 
   return (
-    <div className='p-8'>
+    <div className=''>
         <Suspense fallback={<p className='bg-slate-300 flex justify-center'>loading...</p>} >
             <EditNotes {...noteJson} noteId={noteId} sessionUser={sessionUser} />
         </Suspense>

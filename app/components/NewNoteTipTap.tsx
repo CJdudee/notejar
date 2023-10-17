@@ -61,7 +61,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
 
       <div className='  float-left pl-10 '>
       {/* <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link> */}
-        <button className='hover:bg-blue-200 p-1 rounded-md outline outline-blue-400' type='submit'> Save </button>
+        <button className='hover:bg-blue-200 p-1 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>
       </div>
       
 
@@ -76,7 +76,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
 
 
     {open && (
-                    <div className="mt-1 origin-top-right absolute right-0 S w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 visible">
+                    <div className="mt-1 origin-top-right absolute right-4 S w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 visible">
                         <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                             <li className='bg-gray-300 flex justify-evenly'>
                                 <button
@@ -99,22 +99,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
                                 }}
                                 />
                             </li>
-                            <li>
-                                <a
-                                    
-                                    onClick={closeDropdown}
-                                >
-                                    Invite Editor
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    
-                                    onClick={closeDropdown}
-                                >
-                                    Option 3
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 )}
@@ -135,18 +120,18 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
         />
       </div>
 
-        <div className=' lg:outline outline-1 outline-offset-8 gap-y-3 lg:mr-40 lg:ml-40 xl:mr-60 xl:ml-60  text-center mb-4  flex justify-evenly  lg:grid grid-rows-2 grid-cols-3 '>
+        <div className='  gap-y-3   text-center mb-4  md:flex justify-evenly  grid grid-rows-2 grid-cols-3 '>
 
         
 
         
         <button
         type='button'
-        className={editor.isActive('bold') ? 'is-active' : ''}
+        className={editor.isActive('bold') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
         onClick={() => editor.chain().focus().toggleBold().run()}
         
         >
-        toggleBold
+        Bold
       </button>
 
       
@@ -154,7 +139,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
+        className={editor.isActive('heading', { level: 1 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
       >
         H1
       </button>
@@ -169,7 +154,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+        className={editor.isActive('heading', { level: 2 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
       >
         H2
       </button>
@@ -184,18 +169,18 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={editor.isActive('strike') ? 'is-active' : ''}
+        className={editor.isActive('strike') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
       >
-        toggleStrike
+        Strike
       </button>
 
 
       <button
       type='button'
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive('code') ? 'is-active' : ''}
+        className={editor.isActive('code') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
       >
-        toggleCodeBlock
+        Code Block
       </button>
 
       </div>

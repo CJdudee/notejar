@@ -15,22 +15,23 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
   _id: string
 }) {
 
-  //console.log(user)
+  
 
     const madeAt = new Date(createdAt).toLocaleDateString('en-us', {weekday: "long", year: 'numeric', month: 'short', day: 'numeric'} )
     const editedAt = new Date(updatedAt).toLocaleDateString('en-us', {weekday: "long", year: 'numeric', month: 'short', day: 'numeric'} )
 
     const madeTime = new Date(createdAt).toLocaleTimeString('en-US')
     const editedTime = new Date(updatedAt).toLocaleTimeString('en-US')
-    //console.log(madeAt)
-  return (
-    <div className='bg-slate-200  p-10 pb-8 rounded-md outline mb-4'>
+    
 
-      <div className='flow-root'>
+  return (
+    <div className='bg-slate-200  px-6 py-8 rounded-md outline mb-4  '>
+
+      <div className='flex justify-between gap-4 md:flow-root'>
 
         <Link href={`/notes/${_id}`} className='text-2xl flex mb-5  hover:text-gray-500 float-left '>Title: {header}</Link>
 
-        <Link href={`/profile/${user._id}`} className='text-2xl hover:text-gray-500 float-right'>
+        <Link href={`/profile/${user._id}`} className='text-2xl hover:text-gray-500 float-right '>
           <div className='flex gap-2'>
 
           <p>By: {user.username}</p>
@@ -46,7 +47,7 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
 
 
 
-        <div className='  rounded-md'>
+        <div className='rounded-md '>
 
 
           {/* <HomePageTipTap text={content} /> */}
@@ -75,9 +76,9 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
         </div>
 
         
-        <div className='text-center   mt-8 w-full  '>
+        <div className='text-center   mt-8 w-full   '>
 
-        <Link href={`/notes/${_id}`} className=' outline p-2 mt-5 rounded-md outline-offset-4 hover:bg-gray-300 pr-10 pl-10'>View</Link>
+        <Link href={`/notes/${_id}`} className=' outline outline-2 p-2 mt-5 rounded-md  hover:bg-gray-300 pr-10 pl-10'>View</Link>
         </div>
     </div>
   )
