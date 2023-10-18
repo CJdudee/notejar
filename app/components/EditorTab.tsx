@@ -67,7 +67,7 @@ export default async function EditorTab({sessionUser}) {
             {inviteNoteJson.map((n: any) => {
               
               return (
-                <Notes sessionUser={sessionUser} {...n} />
+                <Notes key={n._id} sessionUser={sessionUser} {...n} />
               )
             })}
           </ul>

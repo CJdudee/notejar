@@ -50,6 +50,7 @@ export default function ViewUserNotes({ userId, user }) {
 
         <p className='text-black text-xl bg-slate-300 text-center font-semibold'>User: {user.username}</p>
         <div className='w-5 h-5 rounded-xl' style={{ background: user.profileColor }} />
+        
         </div>
   
             
@@ -59,7 +60,7 @@ export default function ViewUserNotes({ userId, user }) {
             <ul className='lg:grid grid-cols-2 gap-4 p-2 mt-1 '>
             {notes.map((n: any) => {
                 return (
-                <ProfileNotes {...n}/>
+                <ProfileNotes key={n._id} {...n}/>
                 )
             })}
             </ul>

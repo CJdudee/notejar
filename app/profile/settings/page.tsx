@@ -158,7 +158,7 @@ export default function page() {
 
         <p className='text-center mb-3 text-2xl font-bold '>Change Password</p>
 
-        <div className='outline outline-offset-1 outline-2 text-center p-4 rounded-md  block lg:grid grid-cols-2 '>
+        <div className='outline outline-offset-1 outline-1 text-center p-4 rounded-md  block lg:grid grid-cols-2 '>
 
 
         {/* old password div */}
@@ -233,7 +233,7 @@ export default function page() {
         <div className='bg-slate-300 rounded-lg p-2 px-4'>
 
             <div className='flow-root'>
-                <button type='submit' className=' float-left ml-6 outline p-2 rounded outline-2 hover:bg-slate-400 mt-4'>Save</button>
+                <button type='submit' className=' float-left ml-6 outline p-2 rounded outline-2 hover:bg-blue-300 mt-4 outline-blue-400'>Save</button>
             </div>
 
             

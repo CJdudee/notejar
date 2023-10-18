@@ -64,13 +64,13 @@
 
  .is-active {
     
-    border-radius: 5px;
+    border-radius: 6px;
     
     ;
     outline-style: solid;
     outline-width: 1px;
     outline-color: gray;
-    outline-offset: 4px;
+    outline-offset: 2px;
 
     
     

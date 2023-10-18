@@ -7,7 +7,11 @@ import AuthButton from './AuthButton'
 import ProfileDropDownMenu from './ProfileDropDownMenu'
 
 export default function Navbar() {
+  
+  // const pathname = usePathname()
 
+  // console.log(pathname)
+  
   const { data: session, status } = useSession()
 
   const [ open, setOpen ] = useState(false)

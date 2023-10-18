@@ -17,6 +17,8 @@ export default function ViewUserTab({userId, }) {
    const {data: session, status } = useSession()
   
    const searchParams = useSearchParams()
+
+   const search = searchParams.get('tab')
   
    const router = useRouter()
   
@@ -69,7 +71,7 @@ export default function ViewUserTab({userId, }) {
       }
       
       
-      const search = searchParams.get('tab')
+      
       
       //console.log(search)
       //console.log(status)

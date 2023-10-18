@@ -31,7 +31,7 @@ export default function ProfileNotes({_id, header,  saved, likes,  createdAt, up
 
         <div className='flow-root'>
 
-        <p className=' float-none text-center mb-2 font-semibold text-lg  '>title: {header}</p>
+        <p className=' float-none text-center mb-3 font-semibold text-xl  '>title: {header}</p>
 
        
 
@@ -50,7 +50,7 @@ export default function ProfileNotes({_id, header,  saved, likes,  createdAt, up
 
 
        
-        <div className='flex justify-evenly gap-2 text-center static '>
+        <div className='block md:flex justify-evenly gap-2 text-center static font-semibold '>
 
         <p>Created: {madeAt} : {madeTime} </p>
         <p>Updated: {editedAt} : {editedTime} </p>
@@ -63,20 +63,21 @@ export default function ProfileNotes({_id, header,  saved, likes,  createdAt, up
 
         </div>
         
-        <div className='pr-4 pl-4 mt-4  flex justify-center'>
+        <div className='pr-4 pl-4 mt-5  flex justify-center'>
 
         {/* <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link> */}
 
         {/* <Link className='w-1/3 mb-4 outline outline-teal-600  outline-2 outline-offset-1 rounded-lg hover:bg-gray-100 text-center ' href={`/notes/${_id}`}>View note</Link> */}
 
-        <Link className='outline w-1/3 p-2 rounded-md hover:bg-gray-300 text-center' href={`/notes/${_id}`}>View Note</Link>
+        <Link className='outline w-1/4 p-2 rounded-md hover:bg-gray-300 text-center  outline-1' href={`/notes/${_id}`}>View Note</Link>
 
         </div>
 
-        <div className='flex justify-end static  '>
+        <div className='flex justify-end static   '>
                 
-                <p className='float-right mr-10'>likes: {likes}</p>
-              </div>
+          <p className='float-right mr-10 font-bold'>Likes: {likes}</p>
+
+        </div>
 
     </div>
   )

@@ -24,7 +24,7 @@ export default async function UserNotesTab({ user }) {
         <ul className='   lg:grid grid-cols-2 gap-5 p-4 '>
           {notes.map((n: any) => {
             return (
-              <Notes sessionUser={user} {...n}/>
+              <Notes key={n._id} sessionUser={user} {...n}/>
               )
             })}
         </ul>

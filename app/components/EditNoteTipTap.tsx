@@ -10,18 +10,29 @@ import StarterKit from '@tiptap/starter-kit'
 import { useEffect, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
 import EditNoteDropDown from './EditNoteDropDown'
+import TipTapTextButton from './TipTapTextButton'
 
 
 
-//import * as Y from 'yjs'
-//import Collaboration from '@tiptap/extension-collaboration'
+// import Collaboration from '@tiptap/extension-collaboration'
 // import * as Y from 'yjs'
 // import { WebrtcProvider } from 'y-webrtc'
 
 
-// const ydoc = new Y.Doc() 
 
-// const provider = new WebrtcProvider('tiptaptogether2', ydoc)
+
+  
+//  const ydoc = new Y.Doc()
+
+// const provider = new WebrtcProvider('tiptaptogether', ydoc) 
+
+// console.log(ydoc)
+// console.log(provider)
+//const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:3000']})
+
+
+
+// websocket.js:25  WebSocket connection to 'ws://localhost:3000/' failed: 
 
 
 
@@ -63,38 +74,36 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
 
     return (
 
-      <>
+      
 
       <div className=''>
 
 
       <div className='flow-root  '>
 
+
       <div className='  float-left pl-10 '>
-      {/* <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link> */}
+      
 
-        {author ? (<button className='hover:bg-blue-200 p-1 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>) : null }
-
-
-        {/* <button className='hover:bg-blue-200 p-1 rounded-md outline outline-2 outline-blue-400' type='submit'> Save </button> */}
+        {author ? (<button className='hover:bg-blue-200 px-2 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>) : null }
 
 
       </div>
       
 
           
-        {author ?
-        <div className=' float-right pr-10' >
-            <button 
-            className='text-3xl'
-            type='button'
-            onClick={() => setOpen(!open)}
-            >...</button>
+      {author ?
+      <div className=' float-right pr-10' >
+          <button 
+          className='text-3xl font-bold'
+          type='button'
+          onClick={() => setOpen(!open)}
+          >...</button>
 
 
-    {open && (
-      <EditNoteDropDown closeDropdown={closeDropdown} author={author} handleDelete={handleDelete} setInviteModal={setInviteModal} inviteModal={inviteModal} setIsPrivate={setIsPrivate} isPrivate={isPrivate} setOpen={setOpen} open={open} />
-      )}
+      {open && (
+        <EditNoteDropDown closeDropdown={closeDropdown} author={author} handleDelete={handleDelete} setInviteModal={setInviteModal} inviteModal={inviteModal} setIsPrivate={setIsPrivate} isPrivate={isPrivate} setOpen={setOpen} open={open} />
+        )}
 
 
 
@@ -102,6 +111,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
         : null}
         
       </div>
+        {/* end of Save button and Dropdown */}
       
       <div className='flex justify-center pl-10 mb-2 mt-2'>
         <input 
@@ -111,81 +121,22 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
         className=' md:w-80 mb-6 h-6 rounded-md text-lg p-3 '
 
         />
-      </div>
+        </div>
 
-        <div className=' gap-y-3 text-center mb-4  md:flex justify-evenly  grid grid-rows-2 grid-cols-3 '>
-
-        
-
-        
-        <button
-        type='button'
-        className={editor.isActive('bold') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        
-        >
-        Bold
-      </button>
-
-      
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-      >
-        H1
-      </button>
-      
-      
-
-
-      {/* useEffect(() => {
-    editor?.commands.setHeading({ level: 1})
-  }) */}
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-      >
-        H2
-      </button>
-
-      {/* <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        
-      >
-        H3
-      </button> */}
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={editor.isActive('strike') ? 'is-active hover:text-gray-400 ' : 'hover:text-gray-400'}
-      >
-        Strike
-      </button>
-
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive('code') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-      >
-        Code Block
-      </button>
-
-      </div>
+        {/* start of the text button */}
+        <TipTapTextButton editor={editor} />
       
       </div>
 
-    </>
+ 
     )
 
   }
 
 const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete,  newEditorName , setNewEditorName, inviteModal, setInviteModal }) => {
+
+
+  
   const editor = useEditor({
 
   
@@ -226,6 +177,7 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
     onUpdate: ({ editor }) => {
         // const text = editor.getText()
         const text = editor.getHTML()
+        
         setText(text)
     },
 
@@ -236,7 +188,7 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
   
   
 
-  //we will have to make a new components for just the toggle buttons and have to make a div to keep the menubar and editorcontent together while moving the toggle buttons to the side 
+ 
 
   return (
     <div className='mt-4 pt-4 '>
