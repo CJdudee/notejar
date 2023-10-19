@@ -4,9 +4,8 @@ import React from 'react'
 import mongoRoute from './context/mongoroute'
 import { getServerSession } from 'next-auth/next'
 
-import getBlogs from '@/lib/getBlogs'
 import BlogObject from './components/HomePageNotes'
-import getUsersFetch from '@/lib/getBlogsFetch'
+
 import { options } from './api/auth/[...nextauth]/options'
 import HomePageNotes from './components/HomePageNotes'
 

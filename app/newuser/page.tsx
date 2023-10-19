@@ -3,11 +3,14 @@
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function NewUser() {
 
     const {data: session, status } = useSession()
+
+    const [ password, setPassword] = useState('')
+    const [ confirmPwd, setConfirmPwd ] = useState('')
 
     
     
@@ -57,7 +60,7 @@ export default function NewUser() {
 
     
 
-    <form onSubmit={handleSubmit} className='bg-slate-200 w-2/3 h-3/4  rounded-md outline pl-10 pr-10 pt-5 pb-10 mr-10 ml-10 lg:w-3/4 '>
+    <form onSubmit={handleSubmit} className='bg-slate-200 w-2/3 h-3/4  rounded-md outline pl-10 pr-10 pt-5 pb-10 mr-10 ml-10 lg:w-3/4 max-w-3xl '>
 
     <p className='text-end pb-1 text-lg  font-medium'>Create Account</p>
 
@@ -69,7 +72,7 @@ export default function NewUser() {
             <div className='mt-2'>
 
             <input 
-            className='    w-96 lg:w-1/2 rounded-md  pl-2 '
+            className='    w-4/5 rounded-md  pl-2 '
             id='username'
             type='text'
             name='username'
@@ -92,7 +95,7 @@ export default function NewUser() {
             type='password'
             id='password'
             name='password'
-            className='w-96 lg:w-1/2 rounded-md  pl-2'
+            className=' w-4/5 rounded-md  pl-2'
             />
         </div>
 
@@ -113,10 +116,10 @@ export default function NewUser() {
             
 
             <input
-            
+            type='password'
             
            
-            className='w-96 lg:w-1/2 rounded-md  pl-2'
+            className=' w-4/5 rounded-md  pl-2'
             />
         </div>
 
@@ -129,7 +132,7 @@ export default function NewUser() {
         
         <div className='flex justify-center'>
 
-        <button className='outline p-2 mt-5 rounded-md hover:bg-gray-300 '  type='submit'>SignUp</button>
+        <button className='outline p-2 mt-5 rounded-md hover:bg-gray-300 '  type='submit' disabled={password == confirmPwd}>SignUp</button>
 
         </div>
 

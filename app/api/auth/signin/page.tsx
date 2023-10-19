@@ -45,7 +45,7 @@ export default function page() {
 
     
 
-    <form onSubmit={handleSubmit} className='bg-slate-200 w-2/3 h-3/4  rounded-md outline pl-10 pr-10 pt-5 pb-10 mr-10 ml-10 lg:w-3/4 '>
+    <form onSubmit={handleSubmit} className='bg-slate-200 w-2/3 h-3/4  rounded-md outline pl-10 pr-10 pt-5 pb-10 mr-10 ml-10 max-w-4xl '>
 
     <p className='text-end pb-1 text-lg  font-medium'>LogIn</p>
 
@@ -57,7 +57,7 @@ export default function page() {
             <div className='mt-2'>
 
             <input 
-            className='    w-96 lg:w-1/2 rounded-md  pl-2 '
+            className='    w-4/6 rounded-md  pl-2 '
             id='username'
             type='text'
             name='username'
@@ -78,7 +78,7 @@ export default function page() {
             type='password'
             id='password'
             name='password'
-            className='w-96 lg:w-1/2 rounded-md  pl-2'
+            className='w-4/6 rounded-md  pl-2'
             />
             </div>
 
