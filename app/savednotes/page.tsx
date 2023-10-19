@@ -27,7 +27,7 @@ export default async function page() {
 
         return (
             <div className=''>
-                <p className='text-white text-center font-bold text-xl underline  pt-2'>SaveNotes</p>
+                <p className='text-white text-center font-bold text-2xl underline  pt-2'>SaveNotes</p>
 
                 <div className='p-4 mt-2 bg-gray-400 lg:grid-flow-row lg:grid lg:grid-cols-2 gap-2'>
 

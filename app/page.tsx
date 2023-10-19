@@ -10,6 +10,10 @@ import getUsersFetch from '@/lib/getBlogsFetch'
 import { options } from './api/auth/[...nextauth]/options'
 import HomePageNotes from './components/HomePageNotes'
 
+//clean all components you aren't using and pages
+
+//add tiptap webrtc but i might have to use HocusPocus with tiptap with is websocket
+
 //make sure to use await 
 
 export default async function Home() {
@@ -46,7 +50,7 @@ const notesJson = await notes.json()
       
         <p className=' text-2xl mb-3  text-white underline'>HOME PAGE</p>
 
-        <ul className='2xl:grid grid-cols-2 gap-4'>
+        <ul className='xl:grid grid-cols-2 gap-4'>
 
         {notesJson.map((b: any): any => {
           return (
