@@ -14,17 +14,19 @@ import TipTapTextButton from './TipTapTextButton'
 
 
 
-// import Collaboration from '@tiptap/extension-collaboration'
-// import * as Y from 'yjs'
-// import { WebrtcProvider } from 'y-webrtc'
+ import Collaboration from '@tiptap/extension-collaboration'
+import * as Y from 'yjs'
+import { WebrtcProvider } from 'y-webrtc'
+//this is beta
 
-
-
+//you have to start a singaling server in order to have the ydoc be shared with other connections 
+//to start the server run    node ./node_modules/y-webrtc/bin/server.js
+//it will be ran on port=4444 ws://localhost:4444
 
   
-//  const ydoc = new Y.Doc()
+ const ydoc = new Y.Doc()
 
-// const provider = new WebrtcProvider('tiptaptogether', ydoc) 
+const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:4444']}) 
 
 // console.log(ydoc)
 // console.log(provider)
@@ -32,7 +34,7 @@ import TipTapTextButton from './TipTapTextButton'
 
 
 
-// websocket.js:25  WebSocket connection to 'ws://localhost:3000/' failed: 
+
 
 
 
@@ -158,9 +160,9 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
         }
       }),
 
-      // Collaboration.configure({
-      //   document: ydoc,
-      // }),
+      Collaboration.configure({
+        document: ydoc,
+      }),
 
       // Heading.configure({
       //   levels: [1, 2, 3],

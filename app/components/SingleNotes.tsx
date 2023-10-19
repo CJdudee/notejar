@@ -105,7 +105,7 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
 
     
 
-    <div className='p-4 bg-blue-200 rounded-md  '>
+    <div className='p-4 bg-gray-200 rounded-md  '>
        
         
 

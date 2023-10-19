@@ -36,7 +36,6 @@
     "react-select": "^5.7.7",
     "tailwindcss": "3.3.3",
     "typescript": "^5.0.4",
-    "y-prosemirror": "^1.2.1",
     "y-webrtc": "^10.2.5",
     "yjs": "^13.6.8"
   },
