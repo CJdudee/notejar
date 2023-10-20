@@ -91,9 +91,10 @@ export default function ViewUserTab({userId, }) {
             <div className='m-3'>
     
             
-                <div className=' outline outline-1 flex h-40 bg-slate-300'>
+                <div className=' outline outline-1 flex h-40 bg-slate-300 gap-1 p-2'>
             
-                    <p className='m-4 text-2xl font-semibold'>User: {username}</p>
+                    <p className='mt-1 text-2xl font-semibold'>User: {username}</p>
+                    <div style={{background: user.profileColor}} className='h-7 w-7 rounded-xl'/>
 
                 </div>
     

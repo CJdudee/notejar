@@ -51,7 +51,7 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
         <div className='flex justify-evenly w-full mb-2 mx-auto '>
 
 
-          <p className=' text-start mb-2 font-semibold text-lg '>title: {header}</p>
+          <p className=' text-start mb-2 font-semibold text-lg '>Title: {header}</p>
           <p className=' text-start mb-2 font-semibold text-lg '>User: {user.username}</p>
 
         </div>
@@ -60,7 +60,7 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
       
     } else {
       titleAndUser = (
-        <p className=' text-center mb-2 font-semibold text-lg '>title: {header}</p>
+        <p className=' text-center mb-2 font-semibold text-lg '>Title: {header}</p>
       )
     }
       
@@ -113,7 +113,7 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
                 )}
 
 
-        <div className='flex justify-evenly gap-2 text-center  '>
+        <div className='block md:flex justify-evenly gap-2 text-center px-2 font-semibold  '>
 
         <p>Created: {madeAt} : {madeTime} </p>
         <p>Updated: {editedAt} : {editedTime} </p>

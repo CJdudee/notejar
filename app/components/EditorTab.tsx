@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import Notes from './Notes'
 
-export default async function EditorTab({sessionUser}) {
+export default function EditorTab({sessionUser}) {
 
     const [isLoading, setIsLoading] = useState(true)
     const [inviteNoteJson, setInviteNoteJson] = useState([])

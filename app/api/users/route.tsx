@@ -58,7 +58,7 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
 
     console.log(data)
 
-    const {username, oldPwd, newPwd, profileColor } = data
+    const {username, oldPwd, newPwd, profileColor, description  } = data
 
     if (!username  ) {
         return NextResponse.json('hey there no name')
@@ -95,7 +95,7 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
 
      users.username = username
 
-     const userUpdated =  users.save()
+     const userUpdated =  await users.save()
 
 
     //  const hashedPwd = await bcrypt.hash(password, 10)

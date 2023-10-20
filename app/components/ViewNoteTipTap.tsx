@@ -75,23 +75,17 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
 
         </div>
 
-     
-      
-
-
         <div className=' float-right pr-4 text-lg' ref={menuRef} >
-            <button
-            className='text-3xl' 
-            type='button'
-            onClick={() => setOpen(!open)}
-            >...</button>
+          <button
+          className='text-3xl font-bold' 
+          type='button'
+          onClick={() => setOpen(!open)}
+          >...</button>
 
 
-    {open && (
-                    <ViewNoteDropDown setOpen={setOpen} open={open} isPrivate={isPrivate} handleSave={handleSave} isNoteSaved={isNoteSaved} handleLike={handleLike} isPostLiked={isPostLiked} />
-                )}
-
-
+          {open && (
+              <ViewNoteDropDown setOpen={setOpen} open={open} isPrivate={isPrivate} handleSave={handleSave} isNoteSaved={isNoteSaved} handleLike={handleLike} isPostLiked={isPostLiked} />
+              )}
 
         </div>
         

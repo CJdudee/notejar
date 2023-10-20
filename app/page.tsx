@@ -44,7 +44,7 @@ const notesJson = await notes.json()
 
   return (
 
-    <div className='px-10 py-8  '>
+    <div className='px-10 py-5  '>
 
       
         <p className=' text-2xl mb-3  text-white underline'>HOME PAGE</p>

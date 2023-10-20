@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema({
         //validate: [colorVal, 'not a valid color'],
         default: '#fff'
     },
+    description: {
+        type: String,
+        maxLenght: 300
+    }
     
 })
 

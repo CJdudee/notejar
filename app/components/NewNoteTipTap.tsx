@@ -14,6 +14,7 @@ import Bold from '@tiptap/extension-bold'
 import Collaboration from '@tiptap/extension-collaboration'
 import * as Y from 'yjs'
 import { WebrtcProvider } from 'y-webrtc'
+import TipTapTextButton from './TipTapTextButton'
 
 
 // const ydoc = new Y.Doc() 
@@ -52,142 +53,85 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
 
     return (
 
-      <>
+      
 
       <div className=''>
 
 
       <div className='flow-root  '>
 
-      <div className='  float-left pl-10 '>
-      {/* <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link> */}
-        <button className='hover:bg-blue-200 p-1 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>
-      </div>
+        <div className='  float-left pl-10 '>
+
+          <button className='hover:bg-blue-200 p-1 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>
+          
+        </div>
       
 
           
 
         <div className=' float-right pr-10' >
-            <button 
-            className='text-3xl'
-            type='button'
-            onClick={() => setOpen(!open)}
-            >...</button>
+          <button 
+          className='text-3xl font-bold'
+          type='button'
+          onClick={() => setOpen(!open)}
+          >...</button>
 
 
-    {open && (
-                    <div className="mt-1 origin-top-right absolute right-4 S w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 visible">
-                        <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                            <li className='bg-gray-300 flex justify-evenly'>
-                                <button
-                                    className=' hover:bg-white rounded-md w-full'
-                                    
-                                    onClick={() => {
-                                      setOpen(!open)
-                                      setIsPrivate(!isPrivate)
-                                    }}
-                                >
-                                    Is Private :
-                                </button>
-                                <input
-                                className='mr-2 cursor-pointer' 
-                                type='checkbox' 
-                                checked={isPrivate}
-                                onChange={() => {
-                                  setOpen(!open)
-                                  setIsPrivate(!isPrivate)
-                                }}
-                                />
-                            </li>
-                            
-                        </ul>
-                    </div>
-                )}
+          {open && (
+    <div className="mt-1 origin-top-right absolute right-4 S w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 visible">
+
+        <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+
+            <li className='bg-gray-300 flex justify-evenly'>
+                <button
+                    className=' hover:bg-white rounded-md w-full'
+                    
+                    onClick={() => {
+                      setOpen(!open)
+                      setIsPrivate(!isPrivate)
+                    }}
+                >
+                    Is Private :
+                </button>
+                <input
+                className='mr-2 cursor-pointer' 
+                type='checkbox' 
+                checked={isPrivate}
+                onChange={() => {
+                  setOpen(!open)
+                  setIsPrivate(!isPrivate)
+                }}
+                />
+            </li>
+            
+        </ul>
+
+    </div>
+          )}
 
 
 
         </div>
         
       </div>
-      
-      <div className='flex justify-center pl-10'>
+      {/* end of flow root */}
+
+      <div className='flex justify-center'>
+
         <input 
         placeholder='Title'
         onChange={e => setTitle(e.target.value)}
         value={title}
         className=' md:w-80 mb-6 h-6 rounded-md text-lg p-3 '
-
         />
-      </div>
-
-        <div className='  gap-y-3   text-center mb-4  md:flex justify-evenly  grid grid-rows-2 grid-cols-3 '>
-
-        
-
-        
-        <button
-        type='button'
-        className={editor.isActive('bold') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        
-        >
-        Bold
-      </button>
-
-      
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-      >
-        H1
-      </button>
-      
-      
-
-
-      {/* useEffect(() => {
-    editor?.commands.setHeading({ level: 1})
-  }) */}
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-      >
-        H2
-      </button>
-
-      {/* <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        
-      >
-        H3
-      </button> */}
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={editor.isActive('strike') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-      >
-        Strike
-      </button>
-
-
-      <button
-      type='button'
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive('code') ? 'is-active hover:text-gray-400' : 'hover:text-gray-400'}
-      >
-        Code Block
-      </button>
 
       </div>
+
+      <TipTapTextButton editor={editor} />
       
       </div>
 
-    </>
+    
     )
 
   }
@@ -246,7 +190,7 @@ const NewNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate
   //we will have to make a new components for just the toggle buttons and have to make a div to keep the menubar and editorcontent together while moving the toggle buttons to the side 
 
   return (
-    <div className='mt-4 pt-4 '>
+    <div className='mt-4 pt-3 '>
      
    
     <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
@@ -259,4 +203,3 @@ const NewNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate
 export default NewNoteTipTap
 
 
-// i could make a new editor and add it to the return or i could just make a <input /> and onchange setTitle 

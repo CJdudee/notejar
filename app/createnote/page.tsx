@@ -57,8 +57,8 @@ export default function page() {
   return (
     <div className='p-4  '>
 
-        <p className='flex justify-center text-white'>NEW NOTE</p>
-        <p className='flex justify-center text-white'>MAKE A HOVER MENU FOR USER AND ECT...</p>
+        <p className='flex justify-center text-white font-bold text-xl'>NEW NOTE</p>
+       
 
     <form onSubmit={handleSubmit} className='bg-slate-200   rounded-md max-w-4xl mx-auto '>
         

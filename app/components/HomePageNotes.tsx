@@ -61,15 +61,15 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
         {/* : (<p>{content.slice(0, 197)}...</p>)} */}
         
 
-          <div className='grid grid-cols-2 mt-4'>
+          <div className='block md:grid grid-cols-2 mt-4 '>
 
         
 
-        <p className=' text-start  text-sm font-light'>Created At: {madeAt} : {madeTime}</p>
+        <p className=' text-center  text-sm '>Created At: {madeAt} : {madeTime}</p>
 
         {madeTime === editedTime ?
          null : 
-         (<p className='  text-end text-sm font-light '>Updated At: {editedAt} : {editedTime}</p>)} 
+         (<p className='  text-center text-sm  '>Updated At: {editedAt} : {editedTime}</p>)} 
         
           </div>
 
