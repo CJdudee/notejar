@@ -1,28 +1,26 @@
 'use client'
 
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import { JSXElementConstructor, useEffect, useRef, useState } from 'react'
 import AuthButton from './AuthButton'
 import ProfileDropDownMenu from './ProfileDropDownMenu'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   
-  // const pathname = usePathname()
-
-  // console.log(pathname)
-  
+  const pathname = usePathname()
   const { data: session, status } = useSession()
 
   const [ open, setOpen ] = useState(false)
 
-  const menuRef = useRef<HTMLDivElement>();  
-
+  const menuRef = useRef<HTMLDivElement>(null);  
+console.log(pathname)
     useEffect(() => {
 
-      const handler = (e) => {
+      const handler = (e: any) => {
 
-        if (!menuRef.current || !menuRef.current.contains(e.target)) {
+        if (!menuRef || !menuRef.current || !menuRef.current.contains(e.target)) {
           setOpen(false)
         }
 
@@ -33,7 +31,6 @@ export default function Navbar() {
       return () => {
         document.removeEventListener('mousedown', handler)
       }
-
 
     })
 
@@ -55,24 +52,22 @@ export default function Navbar() {
 
         <div className='flex justify-evenly'>
 
-        <Link className='text-white hover:text-gray-500 text-xl' href='/'>Home</Link>
+          {/* <Link className={`${pathname === '/' ? 'hidden invisible' : ''}text-white hover:text-gray-500 text-xl`} href='/'>Home</Link> */}
+          <Link className={`${pathname === '/' ? '' : ''}text-white hover:text-gray-500 text-xl`} href='/'>Home</Link>
 
-        {/* <Link href='/createblog' className='text-white hover:text-gray-500 text-xl' >Make new blog post</Link> */}
-        <Link href='/createnote' className='text-white hover:text-gray-500 text-xl'>Create New Note</Link>
-        {/* <AuthButton /> */}
-        <Link href='/savednotes' className='text-white hover:text-gray-500 text-xl hidden lg:block  '>Saved Notes</Link>
+          <Link href='/createnote' className='text-white hover:text-gray-500 text-xl'>Create New Note</Link>
+          
+          <Link href='/savednotes' className='text-white hover:text-gray-500 text-xl hidden lg:block  '>Saved Notes</Link>
+          
+          <div ref={menuRef} className=' float-right pr-6 ' >
 
-        <div ref={menuRef} className=' float-right pr-6 ' >
+            <button type='button' onClick={() => setOpen(!open)} className='hover:outline hover:outline-white outline-2 rounded-xl mr-2 w-7 h-7' style={{ background: session?.user.profileColor ? session.user.profileColor : '#fff'}}/>
 
-          <button type='button' onClick={() => setOpen(!open)} className='hover:outline hover:outline-white outline-2 rounded-xl mr-2 w-7 h-7' style={{ background: session?.user.profileColor ? session.user.profileColor : '#fff'}}/>
-           
-          {/* style={{ backgroundColor: profileImg ? profileImg : '#fff'}} */}
+            {open && (
+                <ProfileDropDownMenu  />
+              )}
 
-          {open && (
-              <ProfileDropDownMenu menuRef={menuRef} />
-            )}
-
-        </div>
+          </div>
 
         </div>
       

@@ -1,48 +1,35 @@
 'use client'
 
 import getUserInfo from '@/lib/getUserInfo'
-import getUserPosts from '@/lib/getUserPosts'
 import { useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { Suspense, useEffect, useState } from 'react'
-import ProfileNav from './ProfileNav'
-import ProfileNotes from './ProfileNotes'
+import { Suspense, useEffect, useState } from 'react'
 import ViewUserNotes from './ViewUserNotes'
 
-export default function ViewUserTab({userId, }) {
+export default function ViewUserTab({userId}) {
     const [ isLoading , setIsLoading ] = useState(true)
     
     const [ user, setUserJson ] = useState<any>()
   
-   const {data: session, status } = useSession()
+    const {data: session, status } = useSession()
   
-   const searchParams = useSearchParams()
+    const searchParams = useSearchParams()
 
-   const search = searchParams.get('tab')
+    const search = searchParams.get('tab')
   
-   const router = useRouter()
+    const router = useRouter()
   
-   useEffect(() => {
-  
-  
+    useEffect(() => {
       async function fetchUser() {
-  
         const user = await getUserInfo(userId)
   
         setUserJson(user)
-
         setIsLoading(false)
-        
-  
       }
 
       fetchUser()
       
-      
     }, [])
-    
-  
-    
     
     if (isLoading === true   ) {
       return (
@@ -70,9 +57,6 @@ export default function ViewUserTab({userId, }) {
         router.push('/profile')
       }
       
-      
-      
-      
       //console.log(search)
       //console.log(status)
       
@@ -85,30 +69,17 @@ export default function ViewUserTab({userId, }) {
         const { username, roles } = user
 
         content = (
-  
-            
-        <Suspense fallback={<p className='p-4 text-center text-xl'>Loading</p>}>
             <div className='m-3'>
-    
-            
-                <div className=' outline outline-1 flex h-40 bg-slate-300 gap-1 p-2'>
-            
-                    <p className='mt-1 text-2xl font-semibold'>User: {username}</p>
-                    <div style={{background: user.profileColor}} className='h-7 w-7 rounded-xl'/>
-
-                </div>
-    
-          
+              <div className=' outline outline-1 flex h-40 bg-slate-300 gap-1 p-2'>
+                <p className='mt-1 text-2xl font-semibold'>User: {username}</p>
+                <div style={{background: user.profileColor}} className='h-7 w-7 rounded-xl'/>
+              </div>
             </div>
-        </Suspense>
           )
-        
       } else {
-  
         content = (
           <ViewUserNotes user={user} userId={userId} />
         )
-  
       }
   
     return content

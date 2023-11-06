@@ -45,3 +45,6 @@ export default function SingleBlog({title, content, createdAt, updatedAt, _id }:
     </div>
   )
 }
+
+
+//delete

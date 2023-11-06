@@ -6,7 +6,7 @@ import React from 'react'
 
 export default function ProfileNav(userId) {
 
-    console.log(userId.userId)
+    //console.log(userId.userId)
 
     const searchParams = useSearchParams()
 

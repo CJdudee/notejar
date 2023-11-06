@@ -1,16 +1,9 @@
 'use client'
 
-
-import React, { Suspense, useEffect, useState } from 'react'
-import Notes from './Notes'
-import getUserPosts from '@/lib/getUserPosts'
-import { useSession } from 'next-auth/react'
-import { redirect, useSearchParams } from 'next/navigation'
-import PendingNoteInv from './PendingNoteInv'
+import { useSearchParams } from 'next/navigation'
 import EditorTab from './EditorTab'
-import UserInfo from './UserInfo'
-import UserProfileNavbar from './UserProfileNavbar'
 import PendingTab from './PendingTab'
+import UserInfo from './UserInfo'
 import UserNotesTab from './UserNotesTab'
 
 export default function UserInfoTab({user}: {

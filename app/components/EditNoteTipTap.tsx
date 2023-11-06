@@ -1,32 +1,25 @@
 'use client'
 import '../tiptap.css'
-
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import CodeBlock from '@tiptap/extension-code-block'
-
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-
 import { useEffect, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
 import EditNoteDropDown from './EditNoteDropDown'
 import TipTapTextButton from './TipTapTextButton'
-
-
-
- import Collaboration from '@tiptap/extension-collaboration'
+import Collaboration from '@tiptap/extension-collaboration'
 import * as Y from 'yjs'
 import { WebrtcProvider } from 'y-webrtc'
-//this is beta
 
 //you have to start a singaling server in order to have the ydoc be shared with other connections 
 //to start the server run    node ./node_modules/y-webrtc/bin/server.js
 //it will be ran on port=4444 ws://localhost:4444
 
   
- const ydoc = new Y.Doc()
+  const ydoc = new Y.Doc()
 
-const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:4444']}) 
+  const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:4444']}) 
 
 
 
@@ -77,59 +70,46 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
     }
 
     return (
-
-      
-
       <div className=''>
+        <div className='flow-root  '>
 
-
-      <div className='flow-root  '>
-
-
-      <div className='  float-left pl-10 '>
-      
-
-        {author ? (<button className='hover:bg-blue-200 px-2 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>) : null }
-
-
-      </div>
-      
-
-          
-      {author ?
-      <div className=' float-right pr-10' >
-          <button 
-          className='text-3xl font-bold'
-          type='button'
-          onClick={() => setOpen(!open)}
-          >...</button>
-
-
-      {open && (
-        <EditNoteDropDown closeDropdown={closeDropdown} author={author} handleDelete={handleDelete} setInviteModal={setInviteModal} inviteModal={inviteModal} setIsPrivate={setIsPrivate} isPrivate={isPrivate} setOpen={setOpen} open={open} />
-        )}
-
-
-
-        </div>
-        : null}
+          <div className='  float-left pl-10 '>
+            {author ? (<button className='hover:bg-blue-200 px-2 rounded-md outline outline-1 outline-blue-400' type='submit'> Save </button>) : null }
+          </div>
         
-      </div>
-        {/* end of Save button and Dropdown */}
-      
-      <div className='flex justify-center pl-10 mb-2 mt-2'>
-        <input 
-        placeholder='Title'
-        onChange={e => setTitle(e.target.value)}
-        value={title}
-        className=' md:w-80 mb-6 h-6 rounded-md text-lg p-3 '
+          {author ?
+          <div className=' float-right pr-10' >
+            <button 
+            className='text-3xl font-bold'
+            type='button'
+            onClick={() => setOpen(!open)}
+            >...</button>
 
-        />
+            {open && (
+            <EditNoteDropDown closeDropdown={closeDropdown} author={author} 
+            handleDelete={handleDelete} setInviteModal={setInviteModal} 
+            inviteModal={inviteModal} setIsPrivate={setIsPrivate} 
+            isPrivate={isPrivate} setOpen={setOpen} open={open} />
+            )}
+          </div>
+          : null}
+          
+        </div>
+          {/* end of Save button and Dropdown */}
+        
+        <div className='flex justify-center pl-10 mb-2 mt-2'>
+          <input 
+          placeholder='Title'
+          onChange={e => setTitle(e.target.value)}
+          value={title}
+          className=' md:w-80 mb-6 h-6 rounded-md text-lg p-3 '
+
+          />
         </div>
 
-        {/* start of the text button */}
-        <TipTapTextButton editor={editor} />
-      
+          {/* start of the text button */}
+          <TipTapTextButton editor={editor} />
+        
       </div>
 
  
@@ -139,33 +119,21 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
 
 const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete,  newEditorName , setNewEditorName, inviteModal, setInviteModal }) => {
 
-
-  
   const editor = useEditor({
-
-  
-
     extensions: [
       CustomBold,
       StarterKit.configure({
-
         history: false,
-
-        
-
       }),
-
       CodeBlock.configure({
         languageClassPrefix: 'language-',
         HTMLAttributes: {
             class: 'bg-slate-800 text-white p-3 mb-2 mt-2 rounded-lg'
         }
       }),
-
       Collaboration.configure({
         document: ydoc,
       }),
-
       // Heading.configure({
       //   levels: [1, 2, 3],
       // }),
@@ -176,7 +144,6 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
             class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen   pb-10    '
         },
     },
-
     content: text,
     onUpdate: ({ editor }) => {
         // const text = editor.getText()
@@ -187,20 +154,11 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
 
     
   })
-  
-  
-  
-  
-
- 
-
   return (
     <div className='mt-4 pt-4 '>
-     
-   
-    <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} sessionUser={sessionUser} user={user} handleDelete={handleDelete}  newEditorName={newEditorName}  setNewEditorName={setNewEditorName} inviteModal={inviteModal} setInviteModal={setInviteModal} />
-   
-    <EditorContent   editor={editor} />
+      <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} sessionUser={sessionUser} user={user} handleDelete={handleDelete}  newEditorName={newEditorName}  setNewEditorName={setNewEditorName} inviteModal={inviteModal} setInviteModal={setInviteModal} />
+    
+      <EditorContent   editor={editor} />
     </div>
   )
 }

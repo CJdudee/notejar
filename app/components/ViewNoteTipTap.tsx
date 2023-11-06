@@ -33,28 +33,20 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
     if (!editor) {
         return null
     }
-
     const [open, setOpen] = useState(false)
-
     const menuRef = useRef<HTMLDivElement>(null);  
 
     useEffect(() => {
-
-      const handler = (e) => {
-
+      const handler = (e: any) => {
         if (!menuRef || !menuRef.current.contains(e.target)) {
           setOpen(false)
         }
-
       }
       
       document.addEventListener('mousedown', handler )
-
       return () => {
         document.removeEventListener('mousedown', handler)
       }
-
-
     })
 
     const closeDropdown = () => {
@@ -62,80 +54,60 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
     }
 
     return (
-
       <>
+        <div className='flow-root  '>
 
-      
+          <div className='float-left pl-4'>
+            {editButton}
+          </div>
 
-      <div className='flow-root  '>
+          <div className=' float-right pr-4 text-lg' ref={menuRef} >
+            <button
+            className='text-3xl font-bold' 
+            type='button'
+            onClick={() => setOpen(!open)}
+            >...</button>
 
-        <div className='float-left pl-4'>
-
-          {editButton}
-
-        </div>
-
-        <div className=' float-right pr-4 text-lg' ref={menuRef} >
-          <button
-          className='text-3xl font-bold' 
-          type='button'
-          onClick={() => setOpen(!open)}
-          >...</button>
-
-
-          {open && (
-              <ViewNoteDropDown setOpen={setOpen} open={open} isPrivate={isPrivate} handleSave={handleSave} isNoteSaved={isNoteSaved} handleLike={handleLike} isPostLiked={isPostLiked} />
-              )}
-
+            {open && (
+              <ViewNoteDropDown setOpen={setOpen} open={open} 
+              isPrivate={isPrivate} handleSave={handleSave} 
+              isNoteSaved={isNoteSaved} handleLike={handleLike} 
+              isPostLiked={isPostLiked} />
+            )}
+          </div>
+          
         </div>
         
-      </div>
+        <div className='flex justify-center pl-10'>
+          <h2 className='  mb-6  rounded-md text-2xl p-1 '> { title } </h2>
+        </div>
+
+        <div className='block text-center md:flex justify-evenly mb-4 font-semibold text-sm'>
       
-      <div className='flex justify-center pl-10'>
-        <h2 className='  mb-6  rounded-md text-2xl p-1 '
+          <p>Created At: {createdAt} : {madeTime}</p>
+          <p>Updated At: {updatedAt}: {editedTime}</p>
 
-        > { title } </h2>
-      </div>
-
-      <div className='block text-center md:flex justify-evenly mb-4 font-semibold text-sm'>
-    
-        <p>Created At: {createdAt} : {madeTime}</p>
-        <p>Updated At: {updatedAt}: {editedTime}</p>
-
-      </div>
-      
-
-    </>
+        </div>
+      </>
     )
 
   }
 
 const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, createdAt, handleLike, isLiked, handleSave, isPostLiked, isNoteSaved, madeTime, editedTime  }) => {
   const editor = useEditor({
-
-  
-
     extensions: [
       CustomBold,
       StarterKit.configure({
-
-        
-
-        
-
       }),
-
       CodeBlock.configure({
         languageClassPrefix: 'language-js',
         HTMLAttributes: {
             class: 'bg-slate-800 text-white p-3 mb-2 mt-2 rounded-lg'
         }
       }),
-
       // Heading.configure({
       //   levels: [1, 2, 3],
       // }),
-      
     ],
 
     editable: false,
@@ -153,22 +125,19 @@ const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, creat
     //     setText(text)
     // },
 
-    
   })
-  
-  
-  
-  
-
   
 
   return (
     <div className='mt-1 pt-1'>
-     
-   
-    <MenuBar editor={editor}  title={title} isPrivate={isPrivate} editButton={editButton} updatedAt={updatedAt} createdAt={createdAt} handleLike={handleLike} isLiked={isLiked} handleSave={handleSave} isPostLiked={isPostLiked} isNoteSaved={isNoteSaved} madeTime={madeTime} editedTime={editedTime}  />
-   
-    <EditorContent editor={editor} />
+      <MenuBar editor={editor}  title={title} 
+      isPrivate={isPrivate} editButton={editButton} 
+      updatedAt={updatedAt} createdAt={createdAt} 
+      handleLike={handleLike} isLiked={isLiked} 
+      handleSave={handleSave} isPostLiked={isPostLiked} 
+      isNoteSaved={isNoteSaved} madeTime={madeTime} 
+      editedTime={editedTime}  />
+      <EditorContent editor={editor} />
     </div>
   )
 }

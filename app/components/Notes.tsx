@@ -1,5 +1,6 @@
 
 
+import { date_format, time_format } from '@/utils/helpers'
 import Link from 'next/link'
 import React from 'react'
 
@@ -11,16 +12,16 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
     likes: number, 
     user: any,
     isPrivate: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt: Date,
+    updatedAt: Date,
     sessionUser: any,
 }) {
 
-    const madeAt = new Date(createdAt).toLocaleDateString('en-us', { year: '2-digit', month: '2-digit', day: 'numeric'} )
-    const editedAt = new Date(updatedAt).toLocaleDateString('en-us', { year: '2-digit', month: '2-digit', day: 'numeric'} )
+    const madeAt = date_format(createdAt)
+    const editedAt = date_format(updatedAt)
 
-    const madeTime = new Date(createdAt).toLocaleTimeString('en-US')
-    const editedTime = new Date(updatedAt).toLocaleTimeString('en-US')
+    const madeTime = time_format(createdAt)
+    const editedTime = time_format(updatedAt)
 
     async function handleDelete() {
 
@@ -50,14 +51,11 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
       titleAndUser = (
         <div className='flex justify-evenly w-full mb-2 mx-auto '>
 
-
           <p className=' text-start mb-2 font-semibold text-lg '>Title: {header}</p>
           <p className=' text-start mb-2 font-semibold text-lg '>User: {user.username}</p>
 
         </div>
       )
-    
-      
     } else {
       titleAndUser = (
         <p className=' text-center mb-2 font-semibold text-lg '>Title: {header}</p>
@@ -88,49 +86,42 @@ export default function Notes({_id, header, content, saved, likes, user, isPriva
 
       <div className='flow-root'>
 
-      <button onClick={handleDelete} className='float-right mr-8 hover:text-red-500 p-2 pb-0 pt-0 rounded-xl bg-gray-300'>X</button>
+        <button onClick={handleDelete} className='float-right mr-8 hover:text-red-500 p-2 pb-0 pt-0 rounded-xl bg-gray-300'>X</button>
 
       </div>
 
-        
         {titleAndUser}
         
 
-        <div className='grid grid-rows-2 gap-1 mb-4'>
+      <div className='grid grid-rows-2 gap-1 mb-4'>
 
-        
-        
         {isPrivate ? 
         (<div className='mb-1'>
-            <p className='flex justify-center '>Is Private: True</p>
-            </div>)
-            : 
-            (<div className='flex justify-evenly mb-1'>
-                <p>Is Private: False</p>
-                <p>saved: {saved}</p>
-                <p>likes: {likes}</p>
-              </div>
-                )}
+          <p className='flex justify-center '>Is Private: True</p>
+        </div>)
+          : 
+        (<div className='flex justify-evenly mb-1'>
+          <p>Is Private: False</p>
+          <p>saved: {saved}</p>
+          <p>likes: {likes}</p>
+        </div>)}
 
 
         <div className='block md:flex justify-evenly gap-2 text-center px-2 font-semibold  '>
-
-        <p>Created: {madeAt} : {madeTime} </p>
-        <p>Updated: {editedAt} : {editedTime} </p>
-
-
+          <p>Created: {madeAt} : {madeTime} </p>
+          <p>Updated: {editedAt} : {editedTime} </p>
         </div>
 
-        </div>
+      </div>
         
-        <div className='pr-4 pl-4 mt-4  flex justify-evenly'>
+      <div className='pr-4 pl-4 mt-4  flex justify-evenly'>
 
 
         <Link className='w-1/3 mb-4 outline outline-teal-600  outline-2 outline-offset-1 rounded-lg hover:bg-gray-100 text-center ' href={`/notes/${_id}`}>View note</Link>
         
         <Link className='w-1/3 mb-4 outline outline-orange-500  outline-2 outline-offset-1 rounded-lg hover:bg-orange-100 text-center ' href={`/notes/${_id}/edit`}>Edit</Link>
 
-        </div>
+      </div>
 
     </div>
   )

@@ -46,6 +46,14 @@ export default function TipTapTextButton({editor}) {
         Strike
       </button>
 
+      <button 
+      type='button'
+      onClick={() => editor.chain().focus().toggleItalic().run()}
+      className={editor.isActive('italic') ? 'is-active' : 'hover:text-gray-400'}>
+        
+      Italic
+      </button>
+
 
       <button
       type='button'
