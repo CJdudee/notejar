@@ -12,28 +12,16 @@ import Collaboration from '@tiptap/extension-collaboration'
 import * as Y from 'yjs'
 import { WebrtcProvider } from 'y-webrtc'
 
-//you have to start a singaling server in order to have the ydoc be shared with other connections 
-//to start the server run    node ./node_modules/y-webrtc/bin/server.js
 //it will be ran on port=4444 ws://localhost:4444
 
-  
-  const ydoc = new Y.Doc()
+const ydoc = new Y.Doc()
 
+//to start the server run    node ./node_modules/y-webrtc/bin/server.js
   const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:4444']}) 
 
-
-
-// console.log(ydoc)
-// console.log(provider)
 //const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:3000']})
 
-
-
-
-
-
-
-const  CustomBold = Bold.extend({
+  const  CustomBold = Bold.extend({
 
   name: 'CustomBold',
   addKeyboardShortcuts() {
@@ -42,12 +30,7 @@ const  CustomBold = Bold.extend({
       'Mod-B': () => this.editor.commands.toggleBold(),
     }
   },
-})
-
-
-
-
-
+  })
 
 
 const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete, newEditorName , setNewEditorName,  inviteModal, setInviteModal }) => {

@@ -1,5 +1,5 @@
 import HomePageNotes from './components/HomePageNotes'
-//clean all components you aren't using and pages
+//tiptap Collaboration is the only feature i need to add now       
 
 export default async function Home() {
   // const session = await getServerSession(options)
@@ -13,11 +13,11 @@ export default async function Home() {
 
         <ul className='xl:grid grid-cols-2 gap-4'>
 
-        {notesJson.map((b: any): any => {
-          return (
-            <HomePageNotes key={b._id} {...b} />
-            )
-          })}
+          {notesJson.map((b: any): any => {
+            return (
+              <HomePageNotes key={b._id} {...b} />
+              )
+            })}
 
         </ul>
     </div>
