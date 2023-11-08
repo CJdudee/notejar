@@ -76,13 +76,7 @@ export default  function page({params: { noteId } }: Params) {
       )
     }
 
-    // if(noteJson.allowedEditor != session.user.id) {
-    //   return (
-    //     <div>
-    //       <p>not allowed</p>
-    //     </div>
-    //   )
-    // }
+    
 
     if(noteJson?.liked_by) {
       var isLiked = noteJson.liked_by.includes(session.user.id)
