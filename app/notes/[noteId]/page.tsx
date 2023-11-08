@@ -76,15 +76,12 @@ export default  function page({params: { noteId } }: Params) {
       )
     }
 
-    
-
     if(noteJson?.liked_by) {
       var isLiked = noteJson.liked_by.includes(session.user.id)
     }
 
     //console.log(noteJson)
 
-   
   return (
     <div className=''>
       <Suspense fallback={<LoadingProfile />}>
