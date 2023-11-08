@@ -105,16 +105,13 @@ const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, creat
             class: 'bg-slate-800 text-white p-3 mb-2 mt-2 rounded-lg'
         }
       }),
-      // Heading.configure({
-      //   levels: [1, 2, 3],
-      // }),
     ],
 
     editable: false,
 
     editorProps: {
         attributes: {
-            class: 'bg-slate-200  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen  pb-10  '
+            class: 'bg-slate-200  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen pb-10  '
         },
     },
 
@@ -145,60 +142,60 @@ const ViewNoteTipTap = ({  text,  title, isPrivate, editButton, updatedAt, creat
 export default ViewNoteTipTap
 
 
-// i could make a new editor and add it to the return or i could just make a <input /> and onchange setTitle 
 
 
- // <div className="mt-1 origin-bottom-left absolute right-10 S w-56 rounded-md   shadow-sm bg-white ring-1 ring-white ring-opacity-5 visible " >
-                    //     <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    //         <li className='bg-gray-300 flex justify-evenly'>
-                    //             <button
-                    //                 className='w-full'
-                                    
-                    //                 onClick={() => {
-                    //                   setOpen(!open)
-                                      
-                    //                 }}
-                    //             >
-                    //                 Is Private :
-                    //             </button>
-                    //             <input
-                    //             className='mr-2 ' 
-                    //             type='checkbox' 
-                    //             checked={isPrivate}
-                    //             readOnly
-                    //             />
-                    //         </li>
-                    //         <li className='bg-gray-200 flex justify-evenly'>
-                    //             <button
-                    //                 className='pl-1 pr-1 hover:bg-white rounded-md w-full'
-                                    
-                    //                 onClick={handleSave}
-                    //             >
-                    //                 Save
-                    //             </button>
 
-                    //             <input
-                    //             className=' cursor-pointer mr-2' 
-                    //             type='checkbox' 
-                    //             onChange={handleSave}
-                    //             checked={isNoteSaved}
-                                
-                    //             />
-                    //         </li>
-                    //         <li className='bg-gray-300 flex justify-evenly '>
-                    //             <button
-                    //                 className='pl-1 pr-1 hover:bg-white rounded-md w-full'
-                    //                 onClick={handleLike}
-                    //             >
-                    //                 Like
-                    //             </button>
-                    //             <input
-                    //             className='cursor-pointer mr-2' 
-                    //             type='checkbox' 
-                    //             onChange={handleLike}
-                    //             checked={isPostLiked}
-                                
-                    //             />
-                    //         </li>
-                    //     </ul>
-                    // </div>
+// <div className="mt-1 origin-bottom-left absolute right-10 S w-56 rounded-md   shadow-sm bg-white ring-1 ring-white ring-opacity-5 visible " >
+//     <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+//         <li className='bg-gray-300 flex justify-evenly'>
+//             <button
+//                 className='w-full'
+
+//                 onClick={() => {
+//                   setOpen(!open)
+
+//                 }}
+//             >
+//                 Is Private :
+//             </button>
+//             <input
+//             className='mr-2 ' 
+//             type='checkbox' 
+//             checked={isPrivate}
+//             readOnly
+//             />
+//         </li>
+//         <li className='bg-gray-200 flex justify-evenly'>
+//             <button
+//                 className='pl-1 pr-1 hover:bg-white rounded-md w-full'
+
+//                 onClick={handleSave}
+//             >
+//                 Save
+//             </button>
+
+//             <input
+//             className=' cursor-pointer mr-2' 
+//             type='checkbox' 
+//             onChange={handleSave}
+//             checked={isNoteSaved}
+
+//             />
+//         </li>
+//         <li className='bg-gray-300 flex justify-evenly '>
+//             <button
+//                 className='pl-1 pr-1 hover:bg-white rounded-md w-full'
+//                 onClick={handleLike}
+//             >
+//                 Like
+//             </button>
+//             <input
+//             className='cursor-pointer mr-2' 
+//             type='checkbox' 
+//             onChange={handleLike}
+//             checked={isPostLiked}
+
+//             />
+//         </li>
+//     </ul>
+// </div>

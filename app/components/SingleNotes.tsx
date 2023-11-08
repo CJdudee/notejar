@@ -73,7 +73,7 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
 
         <div className=' max-w-4xl mx-auto'>
 
-            <div className='p-4 bg-gray-200 rounded-md  '>
+            <div className='p-4 bg-gray-300 rounded-md  '>
             
                 <div className='flex justify-evenly font-semibold mb-4'>
                     {/* {isLiked ? (<p>post is liked</p>) : (<p>post is not liked</p>)} */}

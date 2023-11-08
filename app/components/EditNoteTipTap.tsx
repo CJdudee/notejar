@@ -14,10 +14,10 @@ import { WebrtcProvider } from 'y-webrtc'
 
 //it will be ran on port=4444 ws://localhost:4444
 
-const ydoc = new Y.Doc()
+// const ydoc = new Y.Doc()
 
 //to start the server run    node ./node_modules/y-webrtc/bin/server.js
-  const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:4444']}) 
+  // const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:4444']}) 
 
 //const provider = new WebrtcProvider('tiptaptogether', ydoc, { signaling: ['ws://localhost:3000']})
 
@@ -114,9 +114,9 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
             class: 'bg-slate-800 text-white p-3 mb-2 mt-2 rounded-lg'
         }
       }),
-      Collaboration.configure({
-        document: ydoc,
-      }),
+      // Collaboration.configure({
+      //   document: ydoc,
+      // }),
       // Heading.configure({
       //   levels: [1, 2, 3],
       // }),
@@ -149,58 +149,58 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
 export default EditNoteTipTap
 
 
-// i could make a new editor and add it to the return or i could just make a <input /> and onchange setTitle 
+
 
 
 
 // <div className="mt-1 origin-top-right absolute right-0 S w-44 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 visible">
-                    //     <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    //         <li className='bg-gray-300 flex justify-evenly'>
-                    //             <button
-                    //                 className=' hover:bg-white rounded-md w-full'
-                                    
-                    //                 onClick={() => {
-                    //                   setOpen(!open)
-                    //                   setIsPrivate(!isPrivate)
-                    //                 }}
-                    //             >
-                    //                 Is Private :
-                    //             </button>
-                    //             <input
-                    //             className='mr-2 cursor-pointer' 
-                    //             type='checkbox' 
-                    //             checked={isPrivate}
-                    //             onChange={() => {
-                    //               setOpen(!open)
-                    //               setIsPrivate(!isPrivate)
-                    //             }}
-                    //             />
-                    //         </li>
-                    //         <li className='bg-gray-200 flex justify-evenly'>
-                    //             <button
-                    //                 className='hover:bg-white rounded-md w-full'
-                    //                 onClick={() => {
-                    //                   closeDropdown() 
-                    //                   setInviteModal(!inviteModal)
-                    //                 }}
-                    //             >
-                    //                 Invite Editor
-                    //             </button>
-                    //         </li>
-                    //         {author ? 
-                    //         (<li className='bg-gray-200 flex justify-evenly'>
-                    //             <a
-                    //                 className='hover:bg-red-400 rounded-md w-full hover:text-white text-center cursor-pointer'
-                    //                 onClick={() => {
-                    //                   closeDropdown()
-                    //                   handleDelete()
-                    //                 }}
-                    //             >
-                    //                 DELETE NOTE
-                    //             </a>
-                    //         </li>) : 
-                            
-                    //         null}
-                            
-                    //     </ul>
-                    // </div>
+//     <ul className='' role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+//         <li className='bg-gray-300 flex justify-evenly'>
+//             <button
+//                 className=' hover:bg-white rounded-md w-full'
+
+//                 onClick={() => {
+//                   setOpen(!open)
+//                   setIsPrivate(!isPrivate)
+//                 }}
+//             >
+//                 Is Private :
+//             </button>
+//             <input
+//             className='mr-2 cursor-pointer' 
+//             type='checkbox' 
+//             checked={isPrivate}
+//             onChange={() => {
+//               setOpen(!open)
+//               setIsPrivate(!isPrivate)
+//             }}
+//             />
+//         </li>
+//         <li className='bg-gray-200 flex justify-evenly'>
+//             <button
+//                 className='hover:bg-white rounded-md w-full'
+//                 onClick={() => {
+//                   closeDropdown() 
+//                   setInviteModal(!inviteModal)
+//                 }}
+//             >
+//                 Invite Editor
+//             </button>
+//         </li>
+//         {author ? 
+//         (<li className='bg-gray-200 flex justify-evenly'>
+//             <a
+//                 className='hover:bg-red-400 rounded-md w-full hover:text-white text-center cursor-pointer'
+//                 onClick={() => {
+//                   closeDropdown()
+//                   handleDelete()
+//                 }}
+//             >
+//                 DELETE NOTE
+//             </a>
+//         </li>) : 
+
+//         null}
+
+//     </ul>
+// </div>
