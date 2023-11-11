@@ -26,7 +26,7 @@ export default async function page() {
                 {!savedNotesJson.length && 
                 <p className='p-1 text-center bg-slate-300 rounded-lg mx-auto'>You {`haven't`} saved any notes</p>}
 
-                {savedNotesJson.legnth && savedNotesJson.map((r: any) => {
+                {savedNotesJson.length && savedNotesJson.map((r: any) => {
                 return (
                     <SavedNotes key={r.noteId._id} {...r.noteId} savedAt={r.createdAt} />
                     )

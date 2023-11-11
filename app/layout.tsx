@@ -20,10 +20,8 @@ export default function RootLayout({
     <html lang="en">
       <body className='bg-slate-800'>
         <AuthProvider>
-
-        <Navbar />
-        {children}
-        
+          <Navbar />
+          {children}        
         </AuthProvider>
         </body>
     </html>

@@ -1,6 +1,8 @@
 
 import { date_format, time_format } from '@/utils/helpers'
 import Link from 'next/link'
+import { Suspense } from 'react'
+import LoadingProfile from './LoadingProfile'
 
 export default function HomePageNotes({header, content, createdAt, updatedAt, _id, user }: {
   header: string,
@@ -10,6 +12,9 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
   user: any,
   _id: string
 }) {
+
+    // if(!_id || !header || !createdAt || !updatedAt || !user) return null 
+
     const madeAt = date_format(createdAt)
     const editedAt = date_format(updatedAt)
 
@@ -17,6 +22,7 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
     const editedTime = time_format(updatedAt)
 
   return (
+    
     <div className='bg-slate-200  px-6 py-8 rounded-md outline mb-4  '>
 
       <div className='flex justify-between gap-4 md:flow-root'>

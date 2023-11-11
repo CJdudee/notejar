@@ -1,28 +1,42 @@
+import { useRouter } from 'next/navigation'
 import HomePageNotes from './components/HomePageNotes'
 import LoadingProfile from './components/LoadingProfile'
-//tiptap Collaboration is the only feature i need to add now       
+import { Suspense } from 'react'
+import { getServerSession } from 'next-auth'
+import { options } from './api/auth/[...nextauth]/options'
+//tiptap Collaboration is the only feature i need to add now   
 
-export default async function Home() {
-  // const session = await getServerSession(options)
+//serverComponentsExternalPackages: ['mongoose']
+
+export default async function Page() {
+
+  const session = await getServerSession(options)
+
+  // if(!process.env.NEXT_URL) return null 
   const notes = await fetch(`${process.env.NEXT_URL}/api/note`, { cache: 'no-cache'})
   const notesJson = await notes.json()
 
-  if(!notesJson) return <LoadingProfile />
+  // if(!notes && !notesJson) return <p>Loading</p>
+
+    // if(!notesJson) return <LoadingProfile />
+  
   return (
+    // <Suspense fallback={<LoadingProfile />}>
     <div className='px-10 py-5  '>
         <p className=' text-2xl mb-3  text-white underline'>HOME PAGE</p>
 
         <ul className='xl:grid grid-cols-2 gap-4'>
-
-          {notesJson.map((b: any): any => {
-            return (
-              <HomePageNotes key={b._id} {...b} />
-              )
-            })}
+          
+          {notesJson.length && notesJson.map((b: any): any => {
+          return (
+            <HomePageNotes key={b._id} {...b} />
+            )
+          })}
 
         </ul>
     </div>
+    // </Suspense>
   )
 }
 
-//serverComponentsExternalPackages: ['mongoose']
+
