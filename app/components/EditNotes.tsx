@@ -2,7 +2,7 @@
 // we have to fetch this inside of the edit notes page and then we can send this data down as props to use in a useState and be able to handle edits and more 
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import EditNoteTipTap from './EditNoteTipTap'
+import EditNoteTipTap from './tiptapEditors/EditNoteTipTap'
 import InvDialog from './InvDialog'
 
 export default function EditNotes({ content, header, isPrivate: noteIsPrivate, noteId, user, sessionUser, allowedEditor, pendingEditor } : {
@@ -58,7 +58,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
   async function handleInvite() {
 
-    await fetch(`http://localhost:3000/api/singlenote/invite/${noteId}`, {
+    await fetch(`${process.env.URL}/api/singlenote/invite/${noteId}`, {
       method: 'POST',
       body: JSON.stringify( { newEditorName: newEditorName } ),
       headers: {
@@ -72,7 +72,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
   async function removePendingInvite(userId: string) {
     try {
-      const response = await fetch(`http://localhost:3000/api/singlenote/invite/${noteId}`, {
+      const response = await fetch(`${process.env.URL}/api/singlenote/invite/${noteId}`, {
         method: 'DELETE',
         body: JSON.stringify({ deletePendingEditor: userId}),
         headers: {
@@ -91,7 +91,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
     async function removeEditor(userId: string) {
       try {
-        const response = await fetch(`http://localhost:3000/api/singlenote/invite/${noteId}`, {
+        const response = await fetch(`${process.env.URL}/api/singlenote/invite/${noteId}`, {
         method: 'PATCH',
         body: JSON.stringify({ deleteEditorId: userId}),
         headers: {
@@ -109,7 +109,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
     async function handleDelete() {
       try {
-        const response = await fetch(`http://localhost:3000/api/singlenote/${noteId}`, {
+        const response = await fetch(`${process.env.URL}/api/singlenote/${noteId}`, {
         method: 'DELETE',
       })
       if(!response.ok) {

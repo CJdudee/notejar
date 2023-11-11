@@ -4,7 +4,7 @@ import React from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
-export default function getSearchParam() {
+export default function useGetSearchParam() {
   
     const searchParams = useSearchParams()
 

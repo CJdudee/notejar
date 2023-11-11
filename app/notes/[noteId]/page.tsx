@@ -13,7 +13,7 @@ type Params = {
     }
 }
 
-export default  function page({params: { noteId } }: Params) {
+export default function Page({params: { noteId } }: Params) {
 
   const {data: session, status } = useSession({
     required: true,
@@ -28,9 +28,11 @@ export default  function page({params: { noteId } }: Params) {
 
 
   useEffect(() => {
+    if(!noteId) return null
+
     async function fetchNote() {
 
-      const notes = await fetch(`http://localhost:3000/api/singlenote/${noteId}`, { cache: 'no-cache'})
+      const notes = await fetch(`${process.env.NEXT_URL}/api/singlenote/${noteId}`, { cache: 'no-cache'})
       const noteJson = await notes.json()
 
       setNoteJson(noteJson)
@@ -38,7 +40,7 @@ export default  function page({params: { noteId } }: Params) {
     }
 
     async function fetchSave() {
-      const saved =  await fetch(`http://localhost:3000/api/singlenote/saves/${noteId}`, {cache: 'no-cache'})
+      const saved =  await fetch(`${process.env.NEXT_URL}/api/singlenote/saves/${noteId}`, {cache: 'no-cache'})
       const isSaved = await saved.json()
 
       setIsSaved(isSaved)
@@ -54,7 +56,7 @@ export default  function page({params: { noteId } }: Params) {
 
     fetchResult()
 
-  }, [])
+  }, [noteId])
     
 
     //console.log(session)

@@ -2,11 +2,11 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { options } from '../api/auth/[...nextauth]/options'
-import UserInfoTab from '../components/UserInfoTab'
+import UserInfoTab from '../components/userProfile/UserInfoTab'
 import UserProfileNavbar from '../components/UserProfileNavbar'
 import LoadingProfile from '../components/LoadingProfile'
 
-export default async function page() {
+export default async function Page() {
 
 const session = await getServerSession(options)
 
@@ -19,7 +19,7 @@ if(!session) return redirect('/')
       <div className='p-4 bg-slate-300 outline '>
         <UserProfileNavbar />
         <Suspense fallback={<LoadingProfile />}>
-        <UserInfoTab {...session}/>
+          <UserInfoTab {...session}/>
         </Suspense>
       </div>
     )

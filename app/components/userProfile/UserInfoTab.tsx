@@ -20,34 +20,28 @@ export default function UserInfoTab({user}: {
     
 
     if (search === 'editor') {
-
       content = (
         <EditorTab sessionUser={user} />
       )
 
 
     } else if (search === 'pending') {
-
       content = (
         <PendingTab />
       )
 
 
     } else if (search === 'profile') {
-
         content = (
           <UserInfo user={user} />
         )
 
     } else {
-    
       content = (
           <UserNotesTab user={user} />
       )
     }
     
-
-
     return content
   
   

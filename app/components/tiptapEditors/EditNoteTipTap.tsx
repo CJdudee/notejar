@@ -1,12 +1,12 @@
 'use client'
-import '../tiptap.css'
+import '../../tiptap.css'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import CodeBlock from '@tiptap/extension-code-block'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useEffect, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
-import EditNoteDropDown from './EditNoteDropDown'
+import EditNoteDropDown from '../EditNoteDropDown'
 import TipTapTextButton from './TipTapTextButton'
 import Collaboration from '@tiptap/extension-collaboration'
 import * as Y from 'yjs'
@@ -34,6 +34,9 @@ import { WebrtcProvider } from 'y-webrtc'
 
 
 const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete, newEditorName , setNewEditorName,  inviteModal, setInviteModal }) => {
+    
+    const [open, setOpen] = useState(false)
+  
     if (!editor) {
         return null
     }
@@ -46,7 +49,7 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
 
     //console.log(author)
 
-    const [open, setOpen] = useState(false)
+   
 
     const closeDropdown = () => {
       setOpen(false)

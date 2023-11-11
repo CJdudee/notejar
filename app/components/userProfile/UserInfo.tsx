@@ -3,9 +3,8 @@
 
 
 import getUserInfo from '@/lib/getUserInfo'
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
-import React, { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import LoadingProfile from '../LoadingProfile'
 
 export default  function UserInfoTab({ user } : {
     user: any
@@ -19,6 +18,7 @@ export default  function UserInfoTab({ user } : {
     //         redirect('/')
     //     }
     // })
+    const { id } = user
 
     useEffect(() => {
 
@@ -31,20 +31,15 @@ export default  function UserInfoTab({ user } : {
         
         setIsLoading(false)
       }
-  
-      
-  
-      
       fetchUserInfo()
   
-    }, [])
+    })
 
-    const { id } = user
 
 
     if(isLoading === true || !userInfo) {
       return (
-        <p className='p-4 text-center text-xl'>Loading</p>
+        <LoadingProfile />
       )
     }
 
@@ -52,21 +47,15 @@ export default  function UserInfoTab({ user } : {
 
     // console.log(userinfo)
 
-  
-
     const { username, roles } = userInfo
 
-  return (
+    return (
+      <Suspense fallback={<p className=' p-4 text-center bg-slate-300  text-xl'>Loading</p>}>
+        <div className='p-4 flex h-40 bg-slate-300'>
 
-    <Suspense fallback={<p className=' p-4 text-center bg-slate-300  text-xl'>Loading</p>}>
-      
-    <div className='p-4 flex h-40 bg-slate-300'>
+            <p className='m-4 text-2xl font-semibold'>{ username }</p>
 
-        <p className='m-4 text-2xl font-semibold'>{ username }</p>
-
-    </div>
-
-    </Suspense>
-
-  )
+        </div>
+      </Suspense>
+    )
 }

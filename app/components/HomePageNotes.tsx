@@ -37,16 +37,11 @@ export default function HomePageNotes({header, content, createdAt, updatedAt, _i
 
         </Link>
 
-
       </div>
-
-
 
       <div className='rounded-md '>
 
         {/* <HomePageTipTap text={content} /> */}
-        
-
         <div className='block md:grid grid-cols-2 mt-4 '>
 
           <p className=' text-center  text-sm '>Created At: {madeAt} : {madeTime}</p>

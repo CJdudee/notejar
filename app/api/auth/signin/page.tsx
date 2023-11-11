@@ -4,13 +4,10 @@ import React from 'react'
 import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-export default function page() {
+export default function Page() {
 
     const {data: session, status } = useSession()
 
-    
-    
-    
     const router = useRouter()
     
     if (status === 'authenticated') {

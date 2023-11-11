@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 import ViewUserNotes from './ViewUserNotes'
+import LoadingProfile from '../LoadingProfile'
 
 export default function ViewUserTab({userId}) {
     const [ isLoading , setIsLoading ] = useState(true)
@@ -20,6 +21,9 @@ export default function ViewUserTab({userId}) {
     const router = useRouter()
   
     useEffect(() => {
+
+      if(!userId) return null
+
       async function fetchUser() {
         const user = await getUserInfo(userId)
   
@@ -29,15 +33,11 @@ export default function ViewUserTab({userId}) {
 
       fetchUser()
       
-    }, [])
+    }, [userId])
     
-    if (isLoading === true   ) {
+    if (isLoading === true) {
       return (
-        <div className='p-4  w-full bg-slate-300'>
-  
-      <p className='text-center text-xl'>Loading</p>
-      
-        </div>
+        <LoadingProfile />
       )
     }
 

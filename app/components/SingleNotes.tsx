@@ -2,11 +2,11 @@
 
 import Link from 'next/link'
 import React, { useState } from 'react'
-import ViewNoteTipTap from './ViewNoteTipTap'
+import ViewNoteTipTap from './tiptapEditors/ViewNoteTipTap'
 import { date_format, time_format } from '@/utils/helpers'
 
 
-export default async function SingleNotes({noteId, userId, noteJson, isLiked, isSaved} : {
+export default function SingleNotes({noteId, userId, noteJson, isLiked, isSaved} : {
     noteId: string
     userId: string
     noteJson: any
@@ -39,7 +39,6 @@ export default async function SingleNotes({noteId, userId, noteJson, isLiked, is
             <Link className='outline p-2 rounded-md hover:bg-gray-300' href={`/notes/${noteId}/edit`}> Edit </Link>
             )
         }
-        
         
         //handler
 

@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { JSXElementConstructor, useEffect, useRef, useState } from 'react'
-import AuthButton from './AuthButton'
+import AuthButton from '../AuthButton'
 import ProfileDropDownMenu from './ProfileDropDownMenu'
 import { usePathname } from 'next/navigation'
 
@@ -14,8 +14,9 @@ export default function Navbar() {
 
   const [ open, setOpen ] = useState(false)
 
-  const menuRef = useRef<HTMLDivElement>(null);  
-console.log(pathname)
+  const menuRef = useRef<HTMLDivElement>(null); 
+   
+    console.log(pathname)
     useEffect(() => {
 
       const handler = (e: any) => {
@@ -39,11 +40,9 @@ console.log(pathname)
   if(status == 'unauthenticated') {
     content = (
       <nav className='bg-slate-900 outline outline-1  pt-3 pb-3 flex justify-evenly '>
-
         <Link className='text-white hover:text-gray-500 text-xl' href='/'>Home</Link>
         <Link href={`/newuser`} className='text-white hover:text-gray-500 text-xl'>SignUp</Link>
         <AuthButton />
-
       </nav>
     )
   } else {

@@ -5,8 +5,8 @@ import { Suspense, } from 'react'
 import { options } from '../../api/auth/[...nextauth]/options'
 
 
-import ProfileNav from '@/app/components/ProfileNav'
-import ViewUserTab from '@/app/components/ViewUserTab'
+import ProfileNav from '@/app/components/viewUserProfile/ProfileNav'
+import ViewUserTab from '@/app/components/viewUserProfile/ViewUserTab'
 
 type Params = {
     params: {
@@ -21,11 +21,11 @@ export default async function page( {params: { userId } }: Params) {
 
   return (
     <div className='p-4 bg-slate-300 outline '>
-        <ProfileNav userId={userId} />
-        <Suspense fallback={<p className=' p-4 text-center bg-slate-300  text-xl'>Loading</p>}>
+      <ProfileNav userId={userId} />
+      <Suspense fallback={<p className=' p-4 text-center bg-slate-300  text-xl'>Loading</p>}>
         <ViewUserTab userId={userId} />
-        </Suspense>
-      </div>
+      </Suspense>
+    </div>
   )
   
 }

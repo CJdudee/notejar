@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ProfileNotes from './ProfileNotes'
 import getUserPosts from '@/lib/getUserPosts'
-import LoadingProfile from './LoadingProfile'
+import LoadingProfile from '../LoadingProfile'
 
 export default function ViewUserNotes({ userId, user }) {
     const [ isLoading , setIsLoading ] = useState(true)
@@ -17,7 +17,7 @@ export default function ViewUserNotes({ userId, user }) {
   
       }
         fetchNotes()
-      }, [])
+      })
 
       if(isLoading === true || !notes) {
         return (

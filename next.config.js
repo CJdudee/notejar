@@ -9,7 +9,9 @@ const nextConfig = {
 
     },
 
-
+    env: {
+        NEXT_URL: process.env.NEXT_URL
+    }
 }
 
 

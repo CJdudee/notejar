@@ -2,10 +2,9 @@
 
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import NoteDropDown from '../components/NoteDropDown'
-import NewNoteTipTap from '../components/NewNoteTipTap'
+import NewNoteTipTap from '../components/tiptapEditors/NewNoteTipTap'
 
-export default function page() {
+export default function Page() {
 
     const [text, setText ] = useState('')
 
@@ -16,40 +15,37 @@ export default function page() {
     const router = useRouter()
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        const target = e.currentTarget
+    e.preventDefault()
+    const target = e.currentTarget
 
-        
-        //  const isPrivate = target.elements.namedItem('checkbox') as HTMLInputElement
+    //  const isPrivate = target.elements.namedItem('checkbox') as HTMLInputElement
 
-        const data = {
-            header: title,
-            content: text,
-            isPrivate
-            // header: header.value,
-            // content: content.value,
-            // isPrivate: isPrivate.value
-        }
+    const data = {
+        header: title,
+        content: text,
+        isPrivate
+        // header: header.value,
+        // content: content.value,
+        // isPrivate: isPrivate.value
+    }
 
 
-        try {
-            const response = await fetch('/api/note', {
-                method: "POST",
-                body: JSON.stringify(data),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            if (!response.ok) {
-                throw new Error('error with post')
+    try {
+        const response = await fetch('/api/note', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
             }
-        } catch (error) {
-            console.log('problem with post')
-        }   
+        })
+        if (!response.ok) {
+            throw new Error('error with post')
+        }
+    } catch (error) {
+        console.log('problem with post')
+    }   
 
-        // console.log(isPrivate.value)
-       
-
+    // console.log(isPrivate.value)
         router.push('/')
 
     }
@@ -58,25 +54,15 @@ export default function page() {
     <div className='p-4  '>
 
         <p className='flex justify-center text-white font-bold text-xl'>NEW NOTE</p>
-       
 
-    <form onSubmit={handleSubmit} className='bg-slate-200   rounded-md max-w-4xl mx-auto '>
-        
+        <form onSubmit={handleSubmit} className='bg-slate-200   rounded-md max-w-4xl mx-auto '>
+            <div className=' bg-slate-200  rounded-md outline'>
+                <NewNoteTipTap setText={setText} text={text} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
+            </div>
 
-
-    <div className=' bg-slate-200  rounded-md outline'>
-
-
-
-    <NewNoteTipTap setText={setText} text={text} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
-    </div>
-
-    </form>
+        </form>
 
     </div>
-
-
-
 )
 }
 

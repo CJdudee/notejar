@@ -1,13 +1,11 @@
 'use client'
 import '../tiptap.css'
 
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import CodeBlock from '@tiptap/extension-code-block'
 
-import { useEditor, EditorContent } from '@tiptap/react'
+import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 
-import {  Ref, useEffect, useRef, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
 
 
@@ -23,28 +21,12 @@ const  CustomBold = Bold.extend({
 })
 
 
-
-
-
-
-
-
-
 const HomePageTipTap = ({  text  }) => {
   const editor = useEditor({
-
-  
-
     extensions: [
       CustomBold,
       StarterKit.configure({
-
-        
-
-        
-
       }),
-
       CodeBlock.configure({
         languageClassPrefix: 'language-js',
         HTMLAttributes: {
@@ -57,7 +39,6 @@ const HomePageTipTap = ({  text  }) => {
       // }),
       
     ],
-
     editable: false,
 
     editorProps: {
@@ -72,28 +53,13 @@ const HomePageTipTap = ({  text  }) => {
     //     const text = editor.getHTML()
     //     setText(text)
     // },
-
-    
   })
-  
-  
-  
-  
-
-  
 
   return (
     <div className=' pt-4'>
-     
-   
-    
-   
-    <EditorContent   editor={editor} />
+      <EditorContent editor={editor} />
     </div>
   )
 }
 
 export default HomePageTipTap
-
-
-// i could make a new editor and add it to the return or i could just make a <input /> and onchange setTitle 

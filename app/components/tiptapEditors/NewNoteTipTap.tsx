@@ -1,5 +1,5 @@
 'use client'
-import '../tiptap.css'
+import '../../tiptap.css'
 
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import CodeBlock from '@tiptap/extension-code-block'
@@ -15,6 +15,7 @@ import Collaboration from '@tiptap/extension-collaboration'
 import * as Y from 'yjs'
 import { WebrtcProvider } from 'y-webrtc'
 import TipTapTextButton from './TipTapTextButton'
+import { editorConfig } from '@/utils/tiptapConfig'
 
 
 // const ydoc = new Y.Doc() 
@@ -35,26 +36,20 @@ const  CustomBold = Bold.extend({
 })
 
 
-
-
-
-
-
 const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
-    if (!editor) {
-        return null
-    }
+    
 
     const [open, setOpen] = useState(false)
+    
+    if (!editor) {
+      return null
+  }
 
     const closeDropdown = () => {
       setOpen(false)
     }
 
     return (
-
-      
-
       <div className=''>
 
 
@@ -137,65 +132,56 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate }) => {
   }
 
 const NewNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate }) => {
-  const editor = useEditor({
+  // const editor = useEditor({
+  //   extensions: [
+  //     CustomBold,
+  //     StarterKit.configure({
+  //       history: false,
+  //     }),
 
-  
+  //     CodeBlock.configure({
+  //       languageClassPrefix: 'language-',
+  //       HTMLAttributes: {
+  //           class: 'bg-slate-800 text-white p-3 mb-2 mt-2 rounded-lg'
+  //       }
+  //     }),
 
-    extensions: [
-      CustomBold,
-      StarterKit.configure({
+  //     // Collaboration.configure({
+  //     //   document: ydoc,
+  //     // }),
 
-        history: false,
+  //     // Heading.configure({
+  //     //   levels: [1, 2, 3],
+  //     // }),
+  //   ],
+  //   editorProps: {
+  //       attributes: {
+  //           class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen   pb-10    '
+  //       },
+  //   },
 
-        
-
-      }),
-
-      CodeBlock.configure({
-        languageClassPrefix: 'language-',
-        HTMLAttributes: {
-            class: 'bg-slate-800 text-white p-3 mb-2 mt-2 rounded-lg'
-        }
-      }),
-
-      // Collaboration.configure({
-      //   document: ydoc,
-      // }),
-
-      // Heading.configure({
-      //   levels: [1, 2, 3],
-      // }),
-      
-    ],
-    editorProps: {
-        attributes: {
-            class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen   pb-10    '
-        },
-    },
-
-    content: text,
-    onUpdate: ({ editor }) => {
-        // const text = editor.getText()
-        const text = editor.getHTML()
-        setText(text)
-    },
+  //   content: text,
+  //   onUpdate: ({ editor }) => {
+  //       // const text = editor.getText()
+  //       const text = editor.getHTML()
+  //       setText(text)
+  //   },
 
     
-  })
+  // })
   
   
-  
+  const editor = editorConfig(text, setText)
   
 
   //we will have to make a new components for just the toggle buttons and have to make a div to keep the menubar and editorcontent together while moving the toggle buttons to the side 
 
   return (
     <div className='mt-4 pt-3 '>
-     
-   
-    <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
-   
-    <EditorContent   editor={editor} />
+      <MenuBar editor={editor} setTitle={setTitle} 
+      title={title} isPrivate={isPrivate} 
+      setIsPrivate={setIsPrivate} />
+      <EditorContent   editor={editor} />
     </div>
   )
 }

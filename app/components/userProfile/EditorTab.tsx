@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import Notes from './Notes'
+import Notes from '../Notes'
+import LoadingProfile from '../LoadingProfile'
 
 export default function EditorTab({sessionUser}) {
 
@@ -11,7 +12,7 @@ export default function EditorTab({sessionUser}) {
 
         async function fetchNoteInvite() {
     
-            const invitedNote = await fetch('http://localhost:3000/api/users/invite', { cache: 'no-cache'})
+            const invitedNote = await fetch(`${process.env.NEXT_URL}/api/users/invite`, { cache: 'no-cache'})
 
             const invitedNoteJson = await invitedNote.json()
 
@@ -40,16 +41,13 @@ export default function EditorTab({sessionUser}) {
 
       if(!inviteNoteJson || isLoading === true) {
         return (
-          <div className='p-4'>
-            
-          <p className='text-center bg-slate-300 text-xl '> Loading </p>
-          </div>
+          <LoadingProfile />
         )
       }
 
       if(!inviteNoteJson.length) {
         return (
-          <div className='outline p-4 bg-slate-300'>
+          <div className=' p-4 bg-slate-300'>
 
           <p className='text-center bg-slate-300 p-4  font-bold'> you are not invited to any notes</p>
 
@@ -59,20 +57,16 @@ export default function EditorTab({sessionUser}) {
 
       return (
         <Suspense fallback={<p className='bg-slate-300 text-center text-xl p-4'>Loading</p>}>
-        <div className=''>
-
-          
-
-          <ul className='lg:grid grid-cols-2 gap-5 p-4'>
-            {inviteNoteJson.map((n: any) => {
-              
-              return (
-                <Notes key={n._id} sessionUser={sessionUser} {...n} />
-              )
-            })}
-          </ul>
-
-        </div>
+          <div className=''>
+            <ul className='lg:grid grid-cols-2 gap-5 p-4'>
+              {inviteNoteJson.map((n: any) => {
+                
+                return (
+                  <Notes key={n._id} sessionUser={sessionUser} {...n} />
+                )
+              })}
+            </ul>
+          </div>
         </Suspense>
       )
   

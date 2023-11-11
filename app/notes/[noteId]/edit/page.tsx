@@ -14,7 +14,7 @@ type Params = {
 }
 
 
-export default  function page({params: { noteId: postId } }: Params) {
+export default function Page({params: { noteId: postId } }: Params) {
 
   const {data: session, status } = useSession({ 
     required: true, 
@@ -32,9 +32,10 @@ export default  function page({params: { noteId: postId } }: Params) {
   const router = useRouter()
 
   useEffect(() => {
+    if(!noteId) return 
 
   async function fetchUser() {
-    const notes = await fetch(`http://localhost:3000/api/singlenote/${noteId}`, { cache: 'no-cache'})
+    const notes = await fetch(`${process.env.NEXT_URL}/api/singlenote/${noteId}`, { cache: 'no-cache'})
 
       const noteJson = await notes.json() 
       setNoteJson(noteJson)
@@ -48,15 +49,14 @@ export default  function page({params: { noteId: postId } }: Params) {
     setIsLoading(false)
   }
   
-}, [status])
+}, [status, noteId])
 
 
   if( isLoading === true || !noteJson || status !== 'authenticated' ) {
     return <LoadingProfile /> 
   }
-
-  // const notes = await fetch(`http://localhost:3000/api/singlenote/${noteId}`, { cache: 'no-cache'})
-  //   const noteJson = await notes.json()
+    // const notes = await fetch(`http://localhost:3000/api/singlenote/${noteId}`, { cache: 'no-cache'})
+    // const noteJson = await notes.json()
 
     //console.log(noteJson)
 

@@ -1,18 +1,16 @@
 'use client'
-import '../tiptap.css'
+import '../../tiptap.css'
 
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import CodeBlock from '@tiptap/extension-code-block'
-
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-
 import {  Ref, useEffect, useRef, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
-import ViewNoteDropDown from './ViewNoteDropDown'
+import ViewNoteDropDown from '../ViewNoteDropDown'
 
 
-const  CustomBold = Bold.extend({
+const CustomBold = Bold.extend({
 
   name: 'CustomBold',
   addKeyboardShortcuts() {
@@ -24,30 +22,30 @@ const  CustomBold = Bold.extend({
 })
 
 
-
-
-
-
-
 const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, handleLike, isLiked, handleSave, isPostLiked, isNoteSaved, madeTime, editedTime  }) => {
+    
+  const menuRef = useRef<HTMLDivElement>(null);  
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if(!editor) return null
+    const handler = (e: any) => {
+      if (!menuRef || !menuRef.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    
+    document.addEventListener('mousedown', handler )
+    return () => {
+      document.removeEventListener('mousedown', handler)
+    }
+  }, [editor])
+  
+  
     if (!editor) {
         return null
     }
-    const [open, setOpen] = useState(false)
-    const menuRef = useRef<HTMLDivElement>(null);  
-
-    useEffect(() => {
-      const handler = (e: any) => {
-        if (!menuRef || !menuRef.current.contains(e.target)) {
-          setOpen(false)
-        }
-      }
-      
-      document.addEventListener('mousedown', handler )
-      return () => {
-        document.removeEventListener('mousedown', handler)
-      }
-    })
+    
 
     const closeDropdown = () => {
       setOpen(false)
