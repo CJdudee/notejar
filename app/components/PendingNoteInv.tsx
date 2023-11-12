@@ -12,7 +12,7 @@ export default function PendingNoteInv({noteId, userId, _id}: {
 
 
     async function handlerAccept() {
-        const response = await fetch(`http://localhost:3000/api/users/invite/pendinginvite/${_id}`, {
+        const response = await fetch(`${process.env.NEXT_URL}/api/users/invite/pendinginvite/${_id}`, {
             method: 'PATCH'
         })
 
@@ -24,7 +24,7 @@ export default function PendingNoteInv({noteId, userId, _id}: {
     }
 
     async function handlerDelete() {
-        const response = await fetch(`http://localhost:3000/api/users/invite/pendinginvite/${_id}`, {
+        const response = await fetch(`${process.env.NEXT_URL}/api/users/invite/pendinginvite/${_id}`, {
             method: 'DELETE'
         })
 
@@ -43,15 +43,15 @@ export default function PendingNoteInv({noteId, userId, _id}: {
 
         <div className='flow-root mb-4'>
 
-        <p className='ml-6 font-bold text-xl float-left'>Title: {header}</p>
+            <p className='ml-6 font-bold text-xl float-left'>Title: {header}</p>
 
-        <div className='float-right mr-6 flex gap-2'>
+            <div className='float-right mr-6 flex gap-2'>
 
-<Link href={`/profile/${noteUserId}`} className='  text-xl font-bold hover:text-gray-700 '>Invited By: {username}</Link>
+                <Link href={`/profile/${noteUserId}`} className='  text-xl font-bold hover:text-gray-700 '>Invited By: {username}</Link>
 
-        <div className='w-7 h-7 rounded-xl' style={{background: profileColor ? profileColor : '#fff'}}/>
+                <div className='w-7 h-7 rounded-xl' style={{background: profileColor ? profileColor : '#fff'}}/>
 
-        </div>
+            </div>
 
         </div>
 

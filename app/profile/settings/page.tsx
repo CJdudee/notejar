@@ -45,11 +45,9 @@ export default function Page() {
     async function handleDeleteUser() {
 
         try {
-
-            const response = await fetch('http://localhost:3000/users', {
+            const response = await fetch(`${process.env.NEXT_URL}/users`, {
             method: 'DELETE'
         })
-
         if (!response.ok) {
             throw new Error('error with post')
         }
@@ -59,8 +57,6 @@ export default function Page() {
         }
 
         router.push('/')
-
-
     }
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

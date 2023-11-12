@@ -58,7 +58,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
   async function handleInvite() {
 
-    await fetch(`${process.env.URL}/api/singlenote/invite/${noteId}`, {
+    await fetch(`${process.env.NEXT_URL}/api/singlenote/invite/${noteId}`, {
       method: 'POST',
       body: JSON.stringify( { newEditorName: newEditorName } ),
       headers: {
@@ -72,7 +72,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
   async function removePendingInvite(userId: string) {
     try {
-      const response = await fetch(`${process.env.URL}/api/singlenote/invite/${noteId}`, {
+      const response = await fetch(`${process.env.NEXT_URL}/api/singlenote/invite/${noteId}`, {
         method: 'DELETE',
         body: JSON.stringify({ deletePendingEditor: userId}),
         headers: {
@@ -91,7 +91,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
     async function removeEditor(userId: string) {
       try {
-        const response = await fetch(`${process.env.URL}/api/singlenote/invite/${noteId}`, {
+        const response = await fetch(`${process.env.NEXT_URL}/api/singlenote/invite/${noteId}`, {
         method: 'PATCH',
         body: JSON.stringify({ deleteEditorId: userId}),
         headers: {
@@ -109,7 +109,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
 
     async function handleDelete() {
       try {
-        const response = await fetch(`${process.env.URL}/api/singlenote/${noteId}`, {
+        const response = await fetch(`${process.env.NEXT_URL}/api/singlenote/${noteId}`, {
         method: 'DELETE',
       })
       if(!response.ok) {
@@ -181,7 +181,7 @@ export default function EditNotes({ content, header, isPrivate: noteIsPrivate, n
           sessionUser={sessionUser} user={user} 
           handleDelete={handleDelete} newEditorName={newEditorName} 
           setNewEditorName={setNewEditorName} inviteModal={inviteModal} 
-          setInviteModal={setInviteModal} />
+          setInviteModal={setInviteModal} noteId={noteId} />
         </div>
 
       </form>

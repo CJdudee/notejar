@@ -15,15 +15,11 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
     if (session == null) {
         return NextResponse.json('you have to log in dude')
     }
-    
-
     const client = await mongoRoute()
 
     //const data = await request.json()
 
     //const { deleteEditorId } = data
-
-    
 
     const inviteId = request.url.slice(request.url.lastIndexOf('/') + 1 )
     // const note = await Note.findById(noteId).exec()
@@ -32,9 +28,7 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
 
     if (!inviteId) {
         return NextResponse.json('hey no note was found')
-
-
-     }
+    }
 
     //  try {
     //     var note = await Note.findById(noteId).exec()
@@ -71,7 +65,7 @@ export async function PATCH(request: NextRequest, res: NextResponse) {
         return NextResponse.json('user is already in the note')
     } 
 
-    await note.pendingEditor.pull(invite.newEditorId)
+    // await note.pendingEditor.pull(invite.newEditorId)
 
     await note.allowedEditor.push(invite.newEditorId)
 
@@ -125,6 +119,8 @@ export async function DELETE(request: NextRequest, res: NextResponse) {
     //  }
 
     const deleteInvite = await PendingInvite.findByIdAndDelete(inviteId).exec()
+
+    const deletePending = await PendingInvite.deleteOne({_id: inviteId})
 
    //console.log(note)
 

@@ -10,7 +10,8 @@ import EditNoteDropDown from '../EditNoteDropDown'
 import TipTapTextButton from './TipTapTextButton'
 import Collaboration from '@tiptap/extension-collaboration'
 import * as Y from 'yjs'
-import { WebrtcProvider } from 'y-webrtc'
+import { HocuspocusProvider, TiptapCollabProvider } from "@hocuspocus/provider";
+// import { WebrtcProvider } from 'y-webrtc'
 
 //it will be ran on port=4444 ws://localhost:4444
 
@@ -103,9 +104,26 @@ const MenuBar = ({ editor, setTitle, title, isPrivate, setIsPrivate, sessionUser
 
   }
 
-const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete,  newEditorName , setNewEditorName, inviteModal, setInviteModal }) => {
+const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivate, sessionUser, user, handleDelete,  newEditorName , setNewEditorName, inviteModal, setInviteModal, noteId }) => {
+
+  const doc = new Y.Doc()
+
+  useEffect(() => {
+    const provider = new HocuspocusProvider({
+      name: noteId ? noteId : '2',
+      url: 'ws://127.0.0.1:1234',
+      document: doc,
+      token: 'notoken' // replace with jwt maybe map
+    })
+
+    return () => {
+      provider.destroy()
+    }
+  }, [noteId])
 
   const editor = useEditor({
+
+
     extensions: [
       CustomBold,
       StarterKit.configure({
@@ -117,9 +135,9 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
             class: 'bg-slate-800 text-white p-3 mb-2 mt-2 rounded-lg'
         }
       }),
-      // Collaboration.configure({
-      //   document: ydoc,
-      // }),
+      Collaboration.configure({
+        document: doc,
+      }),
       // Heading.configure({
       //   levels: [1, 2, 3],
       // }),
@@ -127,19 +145,31 @@ const EditNoteTipTap = ({ setText, text, setTitle, title, isPrivate, setIsPrivat
     ],
     editorProps: {
         attributes: {
-            class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen   pb-10    '
+          class: 'bg-slate-300  p-2 outline-none rounded-md text-clip pl-3 min-h-screen max-h-screen   pb-10    '
         },
     },
-    content: text,
-    onUpdate: ({ editor }) => {
-        // const text = editor.getText()
-        const text = editor.getHTML()
+    
+    content: '',
+    // onCreate: ({ editor, content }: any) => {
+      
+    // }
+    // onUpdate: ({ editor }) => {
+    //     // const text = editor.getText()
+    //     const text = editor.getHTML()
         
-        setText(text)
-    },
-
+    //     setText(text)
+    //     console.log(noteId)
+    // },
     
   })
+
+  // editor.commands.setContent(text)
+  useEffect(() => {
+    if(!editor) return 
+
+    editor.commands.setContent(text)
+  }, [editor])
+
   return (
     <div className='mt-4 pt-4 '>
       <MenuBar editor={editor} setTitle={setTitle} title={title} isPrivate={isPrivate} setIsPrivate={setIsPrivate} sessionUser={sessionUser} user={user} handleDelete={handleDelete}  newEditorName={newEditorName}  setNewEditorName={setNewEditorName} inviteModal={inviteModal} setInviteModal={setInviteModal} />
