@@ -28,7 +28,8 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if(!editor) return null
+    if(!editor) null
+    
     const handler = (e: any) => {
       if (!menuRef || !menuRef.current.contains(e.target)) {
         setOpen(false)
@@ -36,9 +37,14 @@ const MenuBar = ({ editor, title, isPrivate, editButton,  updatedAt, createdAt, 
     }
     
     document.addEventListener('mousedown', handler )
-    return () => {
-      document.removeEventListener('mousedown', handler)
+    // return () => {
+    //   document.removeEventListener('mousedown', handler)
+    // }
+    function removeEvent() {
+      document.removeEventListener('mousedown', handler )
     }
+
+    removeEvent()
   }, [editor])
   
   
