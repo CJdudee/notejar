@@ -43,7 +43,7 @@ export default function SingleNotes({noteId, userId, noteJson, isLiked, isSaved}
         //handler
 
     async function handleLiked()  {
-        await fetch(`http://localhost:3000/api/singlenote/likes/${noteId}`, {
+        await fetch(`http://${process.env.NEXT_URL}/api/singlenote/likes/${noteId}`, {
             method: 'PATCH'
         })
 
@@ -56,7 +56,7 @@ export default function SingleNotes({noteId, userId, noteJson, isLiked, isSaved}
 
 
     async function handleSave() {
-        await fetch(`http://localhost:3000/api/singlenote/saves/${noteId}`, {
+        await fetch(`http://${process.env.NEXT_URL}/api/singlenote/saves/${noteId}`, {
             method: 'PATCH'
         })
         if (userId === user) {

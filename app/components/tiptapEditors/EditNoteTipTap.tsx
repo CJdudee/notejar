@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react'
 import Bold from '@tiptap/extension-bold'
 import EditNoteDropDown from '../EditNoteDropDown'
 import TipTapTextButton from './TipTapTextButton'
-
+import Collaboration from '@tiptap/extension-collaboration'
 import * as Y from 'yjs'
-
+import { WebrtcProvider } from 'y-webrtc'
 
 //it will be ran on port=4444 ws://localhost:4444
 
